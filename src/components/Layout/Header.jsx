@@ -11,12 +11,28 @@ const Header = () => {
   //const {actions} = useContext(AuthContext);
 
   return (
-    <header>
-      <nav>
-
-        <div>
-          <Link to="/">Home</Link>
+    <header class="navbar is-dark">
+      
+        <div class="navbar-brand">
+          <Link to="/" class="navbar-item">
+            <img src="/path/to/logo.png" alt="Logo" />
+          </Link>
         </div>
+
+        <div class="navbar-end">
+
+          <Link to="/profile" class="navbar-item">
+
+            <figure class="image is-32x32">
+              <img class="is-rounded" src="/path/to/profile-pic.jpg" alt="User profile" />
+            </figure>
+            <span>User Name</span>
+          </Link>
+
+        </div>
+
+        <a class ="button" ><Link to="/">Home</Link></a>
+
         <div>
         {isAuthenticated ? (<p>USUSARIO AUTENTICADO</p>) : 
                            (<p>USUSARIO NO AUTH.</p>)}
@@ -24,13 +40,15 @@ const Header = () => {
 
         {isAuthenticated ? (
           <>
-            <Link to="/profile"> Perfil </Link>
-            <button onClick={logout}>Salir</button>
+            <a class ="button"> <Link to="/profile"> Perfil </Link> </a>
+            <button class="button is-danger is-outlined" onClick={logout}> Salir </button>
+            
           </>
-        ) : (
-          <Link to="/login">Iniciar Sesion</Link>
+        ) : ( <button class="button is-primary is-light">
+                      <Link to="/login">Iniciar Sesion</Link>
+              </button>
         )}
-      </nav>
+      
     </header>
   );
 };

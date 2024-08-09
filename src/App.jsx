@@ -18,19 +18,28 @@ const App = () => (
   <Router>
     <AuthProvider>
       <Header />
-      <Sidebar />
-      <main>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/profile" element={<PrivateRoute> <ProfilePage /> </PrivateRoute>} />
-          <Route path="/songs" element={<SongsPage />} />
-          <Route path="/songs/:id" element={<SongDetail />} />
-          
-          <Route path="/buscar" element={<Buscar />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-      </main>
+        <div className="columns">
+
+              <div className="column is-one-fifth">
+                <Sidebar />
+              </div>
+
+              <div className="column">
+                  <main>
+                    <Routes>
+                      <Route path="/" element={<HomePage />} />
+                      <Route path="/login" element={<Login />} />
+                      <Route path="/profile" element={<PrivateRoute> <ProfilePage /> </PrivateRoute>} />
+                      <Route path="/songs" element={<SongsPage />} />
+                      <Route path="/songs/:id" element={<SongDetail />} />
+                      
+                      <Route path="/buscar" element={<Buscar />} />
+                      <Route path="*" element={<NotFoundPage />} />
+                    </Routes>
+                  </main>
+                </div>
+
+        </div>
       <Footer />
     </AuthProvider>
   </Router>

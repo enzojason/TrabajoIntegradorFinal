@@ -1,0 +1,10 @@
+.my-fixed-card {
+  width: 350px; /* Ancho fijo */
+  height:300px; /* Alto fijo */
+  overflow: hidden; /* Para manejar contenido que se salga de las medidas */
+}
+
+.my-fixed-card .card-content {
+  height: calc(100% - 20px); /* Ajusta la altura del contenido */
+}
+
