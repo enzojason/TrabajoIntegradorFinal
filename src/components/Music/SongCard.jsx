@@ -8,75 +8,73 @@ const SongCard = ({ item, type, onDelete, onEdit }) => {
     switch (type) {
       case 'song':
         return (
-          <>
-            <div class="card-image">
-              <figure class="image is-4by3">
-                <img
-                  src={item.cover}
-                  alt={item.title}
-                />
-              </figure>
-            </div>
-
-            <div class="card-content">
-                <div class="media">
-                    <div class="media-content">
-                      <p class="title is-6">{item.title}</p>
-                      <p class="subtitle is-6">{item.artist}</p>
-                    </div>
+          <div class="card">
+                <div className="card-image">
+                  <figure className="image is-4by3">
+                    <img
+                      src={item.cover}
+                      alt={item.title}
+                    />
+                  </figure>
                 </div>
-            </div>
+              
+                <div class="media">
+                        <div class="media-content">
+                          <p class="title is-6">{item.title}</p>
+                          {/* <p class="subtitle is-6">{item.artist}</p>*/}
+                        </div>
+                    </div>
 
-            <div class="media">
-                <div class="media-content">
-                    <audio controls style={{ width: '90%' }}>
-                      <source src={item.song_file} type="audio/mpeg" />
-                      Tu navegador no soporta el elemento de audio.
-                    </audio>
-                  </div>
-            </div>
-          </>
+                <div className="media">
+                    <div className="media-content">
+                        <audio controls style={{ width: '90%' }}>
+                          <source src={item.song_file} type="audio/mpeg" />
+                          Tu navegador no soporta el elemento de audio.
+                        </audio>
+                      </div>
+              </div>
+          </div>
         );
       case 'album':
         return (
           <>
-            <p class="card-header-title">{item.title}</p>
-            <p class="subtitle is-6">Artista:{item.artist}</p>
-            <p class="subtitle is-6">Año: {item.year}</p>
-            <p class="subtitle is-6">Creado: {item.created_at}</p>
+            <p className="card-header-title">{item.title}</p>
+            <p className="subtitle is-6">Artista:{item.artist}</p>
+            <p className="subtitle is-6">Año: {item.year}</p>
+            <p className="subtitle is-6">Creado: {item.created_at}</p>
           </>
         );
       case 'artist':
         return (
-          <><div class="card-image">
-              <figure class="image is-128x128">
-                <img class="is-rounded" src={item.image} alt={item.name} />
+          <><div className="card-image">
+              <figure className="image is-128x128">
+                <img className="is-rounded" src={item.image} alt={item.name} />
               </figure>
             </div>
 
-            <p class="title is-4">{item.name}</p>
-            <p class="content">{item.bio}</p>
-            <a href={item.website} class="button is-link">Website</a>
-            <p class="subtitle is-6">Actualizado: {item.updated_at}</p>
+            <p className="title is-4">{item.name}</p>
+            <p className="content">{item.bio}</p>
+            <a href={item.website} className="button is-link">Website</a>
+            <p className="subtitle is-6">Actualizado: {item.updated_at}</p>
           </>
         );
       case 'playlist':
         return (
           <>
-            <p class="title is-4">{item.name}</p>
-            <p class="subtitle is-6">{item.description}</p>
-            <p class="subtitle is-6">Creado: {item.created_at_min}</p>
-            <p class="subtitle is-6">Actualizado: {item.updated_at_max}</p>
-            <p class="subtitle is-6">Entradas: {item.entries.length}</p>
+            <p className="title is-4">{item.name}</p>
+            <p className="subtitle is-6">{item.description}</p>
+            <p className="subtitle is-6">Creado: {item.created_at_min}</p>
+            <p className="subtitle is-6">Actualizado: {item.updated_at_max}</p>
+            <p className="subtitle is-6">Entradas: {item.entries.length}</p>
           </>
         );
       case 'genre':
         return (
           <>
-            <p class="title is-4">{item.name}</p>
-            <p class="subtitle is-6">{item.description}</p>
-            <p class="subtitle is-6">Creado: {item.created_at}</p>
-            <p class="subtitle is-6">Actualizado: {item.updated_at}</p>
+            <p className="title is-4">{item.name}</p>
+            <p className="subtitle is-6">{item.description}</p>
+            <p className="subtitle is-6">Creado: {item.created_at}</p>
+            <p className="subtitle is-6">Actualizado: {item.updated_at}</p>
           </>
         );
       default:
@@ -85,13 +83,13 @@ const SongCard = ({ item, type, onDelete, onEdit }) => {
   };
 
   return (
-        <div class="card">
+        <div className="card">
                 {renderContent()}
-            <div class="buttons">
+            <div className="buttons">
               {type === 'song' && (
                 <>
-                  <button class="button is-warning" onClick={() => onEdit(song)}>Editar</button>
-                  <button class="button is-danger" onClick={() => onDelete(song.id)}>Eliminar</button>
+                  <button className="button is-warning" onClick={() => onEdit(song)}>Editar</button>
+                  <button className="button is-danger" onClick={() => onDelete(song.id)}>Eliminar</button>
                 </>
               )}
             </div>

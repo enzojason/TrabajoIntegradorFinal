@@ -7,7 +7,7 @@ import Buscar from "./Buscar"
 function SongList() {
     const [type, setType] = useState('song'); // Estado para el tipo de contenido
     const [{ data, isError, isLoading }, doFetch] = useFetch(
-        `https://sandbox.academiadevelopers.com/harmonyhub/${type}s/?page_size=200`, // Cambia la URL según el tipo
+        `https://sandbox.academiadevelopers.com/harmonyhub/${type}s/`, // Cambia la URL según el tipo  (?page_size=100)
         {}
     );
 
@@ -16,28 +16,37 @@ function SongList() {
     const [previousPage, setPreviousPage] = useState(null);
 
     const [isCreating, setIsCreating] = useState(false);
-    const [searchTerm, setSearchTerm] = useState('');
+    //const [searchTerm, setSearchTerm] = useState('');
     const [filteredItems, setFilteredItems] = useState([]);
+    
     const [editingItem, setEditingItem] = useState(null);
+    
 
     useEffect(() => {
         doFetch();
     }, [type]); // Refetch cuando cambia el tipo
 
     useEffect(() => {
-        if (data) {
+
+        if (data && Array.isArray(data.results)) {
+            setFilteredItems(data.results);
             setItems(data.results);
             setNextPage(data.next);
             setPreviousPage(data.previous);
+        }else {
+            setFilteredItems([]);
+            setItems([]);
         }
     }, [data]);
 
+  /*
     useEffect(() => {
         const filtered = items.filter(item => {
           return item.title ? item.title.toLowerCase().includes(searchTerm.toLowerCase()) : true;
         });
         setFilteredItems(filtered);
       }, [searchTerm, items]);
+*/
 
     const handleDelete = async (itemId) => {
         try {
@@ -70,12 +79,12 @@ function SongList() {
 
     return (
         <div>
-            <div class="my-5">
+            <div className="my-5">
                 <div>
                     <Buscar />
                 </div>
 
-                <div class="select">
+                <div className="select">
                     <select onChange={(e) => setType(e.target.value)} value={type}>
                         <option value="song">Canciones</option>
                         <option value="album">Álbumes</option>
@@ -85,34 +94,34 @@ function SongList() {
                     </select>
                 </div>
 
-                <h2 class="title">Lista de {type.charAt(0).toUpperCase() + type.slice(1)}s</h2>
+                <h2 className="title">Lista de {type.charAt(0).toUpperCase() + type.slice(1)}s</h2>
 
-                <div class="columns is-vcentered is-mobile">
+                <div className="columns is-vcentered is-mobile">
 
-                    <div class="column is-narrow">
+                    <div className="column is-narrow">
                         {previousPage && 
-                        <button class="button" onClick={() => fetchPage(previousPage)}>
+                        <button className="button" onClick={() => fetchPage(previousPage)}>
                             Anterior
                         </button>
                         }
                     </div>
-                    <div class="column">
-                        <div class="columns is-mobile is-2">
-                        {filteredItems.slice(0, 5).map((item) => (
-                            <div key={item.id} class="column is-one-fifth">
-                            <SongCard 
-                                item={item} 
-                                type={type}
-                                onDelete={() => handleDelete(item.id)} 
-                                onEdit={() => handleEdit(item)} 
-                            />
-                            </div>
-                        ))}
+                    <div className="column">
+                        <div className="columns is-mobile is-2">
+                            {items.slice(0,5).map((item) => (
+                                <div key={item.id} className="column is-one-fifth">
+                                    <SongCard 
+                                        item={item} 
+                                        type={type}
+                                        onDelete={() => handleDelete(item.id)} 
+                                        onEdit={() => handleEdit(item)} 
+                                    />
+                                </div>
+                            ))}
                         </div>
                     </div>
-                    <div class="column is-narrow">
+                    <div className="column is-narrow">
                         {nextPage && 
-                        <button class="button" onClick={() => fetchPage(nextPage)}>
+                        <button className="button" onClick={() => fetchPage(nextPage)}>
                             Siguiente
                         </button>
                         }

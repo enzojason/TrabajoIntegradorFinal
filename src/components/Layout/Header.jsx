@@ -11,42 +11,40 @@ const Header = () => {
   //const {actions} = useContext(AuthContext);
 
   return (
-    <header class="navbar is-dark">
+    <header className="navbar is-dark">
       
-        <div class="navbar-brand">
-          <Link to="/" class="navbar-item">
+        <div className="navbar-brand">
+          <Link to="/" className="navbar-item">
             <img src="/path/to/logo.png" alt="Logo" />
           </Link>
         </div>
 
-        <div class="navbar-end">
-
-          <Link to="/profile" class="navbar-item">
-
-            <figure class="image is-32x32">
-              <img class="is-rounded" src="/path/to/profile-pic.jpg" alt="User profile" />
-            </figure>
-            <span>User Name</span>
-          </Link>
-
-        </div>
-
-        <a class ="button" ><Link to="/">Home</Link></a>
-
-        <div>
-        {isAuthenticated ? (<p>USUSARIO AUTENTICADO</p>) : 
-                           (<p>USUSARIO NO AUTH.</p>)}
-        </div>
 
         {isAuthenticated ? (
           <>
-            <a class ="button"> <Link to="/profile"> Perfil </Link> </a>
-            <button class="button is-danger is-outlined" onClick={logout}> Salir </button>
+            <a className ="button" ><Link to="/">Home</Link></a>
+
+            <div className="navbar-end">
+            
+              <Link to="/profile" className="navbar-item">
+
+                <figure className="image is-32x32">
+                  <img className="is-rounded" src="/path/to/profile-pic.jpg" alt="User profile" />
+                </figure>
+                <span>User Name</span>
+              </Link>
+            </div>
+
+            <a className ="button"> <Link to="/profile"> Perfil </Link> </a>
+            <button className="button is-danger is-outlined" onClick={logout}> Salir </button>
             
           </>
-        ) : ( <button class="button is-primary is-light">
-                      <Link to="/login">Iniciar Sesion</Link>
-              </button>
+        ) : ( 
+          <div className="navbar-end">
+                <button className="button is-primary is-light">
+                              <Link to="/login">Iniciar Sesion</Link>
+                </button>
+          </div>
         )}
       
     </header>
@@ -56,6 +54,13 @@ const Header = () => {
 export default Header;
 
 /*
+
+        <div>
+        {isAuthenticated ? (<p>USUSARIO AUTENTICADO</p>) : 
+                           (<p>USUSARIO NO AUTH.</p>)}
+        </div>
+
+
 import React, { useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
 

@@ -86,7 +86,7 @@ const SongSearch = () => {
         <input type="text" onChange={handleSearchTermChange} placeholder="Título de la canción" />
       </div>
 
-      <button class="button is-success" onClick={handleSearch}>Buscar</button>
+      <button className="button is-success" onClick={handleSearch}>Buscar</button>
 
       {searchPerformed && ( // Solo mostrar resultados si se hizo una búsqueda
         <div>
