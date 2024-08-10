@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../contexts/AuthContext";
+import drstrange from '../../src/assets/drstrange.png';
+
+
 
 function Profile() {
     const [userData, setUserData] = useState(null);
@@ -8,8 +11,14 @@ function Profile() {
     const [editMode, setEditMode] = useState(false);
     const [loadingUpdate, setLoadingUpdate] = useState(false);
     const [errorUpdating, setErrorUpdating] = useState(false);
+
+    const [image, setImage] = useState('');
+    const [first_name, setFirst_name] = useState('');
+    const [last_name, setLast_name] = useState('');
+
     const [dob, setDob] = useState('');
     const [bio, setBio] = useState('');
+
     const updatedData = {
         dob,
         bio,
@@ -20,9 +29,7 @@ function Profile() {
     const doFetch = async () => {
         setLoadingUpdate(true);
         fetch(
-            `${import.meta.env.VITE_API_BASE_URL}users/profiles/${
-                userData.user__id
-            }/`,
+            `${import.meta.env.VITE_API_BASE_URL}users/profiles/${userData.user__id}/`,
             {
                 method: "PATCH",
                 headers: {
@@ -91,68 +98,151 @@ function Profile() {
     if (error) return <p>Error: {error}</p>;
 
     return (
-        <div>
+        <div className="container columns">
             {userData ? (
                 <>
-                    <div>
-                        <img
-                            src={userData.image || "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/fdf706ba-1ba7-47ce-8ef6-bd6931b7cb15/d4dk13v-3b45d0f7-abaa-4851-81b2-2ca5f2bf99fb.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2ZkZjcwNmJhLTFiYTctNDdjZS04ZWY2LWJkNjkzMWI3Y2IxNVwvZDRkazEzdi0zYjQ1ZDBmNy1hYmFhLTQ4NTEtODFiMi0yY2E1ZjJiZjk5ZmIucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0._c9vRNczdzWfYopvLgm7tQG2fUFtRjXbFQf5gp6q0NU"}
-                            alt="Profile image"
-                            style={{ borderRadius: "50%" }}
-                        />
-                        <p>{userData.first_name} {userData.last_name}</p>
-                        <img src={`${import.meta.env.VITE_API_BASE_URL}${userData.state}`}
-                                alt="State icon"
-                                style={{
-                                    height: "20px",
-                                    marginRight: "5px",
-                                    borderRadius: "50%",
-                                        }}
-                        />
-                        <p>{userData.email}</p>
-                        <p>{userData.dob || "No disponible"}</p>
-                        <p>{userData.bio || "No disponible"}</p>
-                        <button onClick={handleEditMode}>
-                            {editMode ? "Salir de modo Edicion" : "Editar"}
-                        </button>
+                <div className="column">
 
-                    </div>
-                    
+                    <div className="card"
+                        style={{width: "700px", // Limita el ancho de la imagen al 100% del contenedor
+                                height: "100%",}}
+                        >
+                        <div className="card-image">
+                            <figure className="image is-4by3">
+                                <img
+                                    src={drstrange}//{userData.image || "../"}
+                                    alt="Imagen de Perfil"
+                                    style={{ borderRadius: "10%" ,
+                                        width: "100%", 
+                                        height: "100%",
+                            
+                                    }}
+                                />
+                            </figure>
+                        </div>
+
+                        <div className="card-content">
+                            <div className="media">
+                                <div className="media-content">
+                                    <p className="title is-4">{userData.first_name} {userData.last_name}</p>
+                                    <p className="subtitle is-6"> {userData.email} </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                        <div className="card-content">
+                            <div className="content">
+                                <label className="label"> Mi BIO:</label>
+                                {userData.bio || "No disponible"}
+                            </div>
+                                <label className="label"> Fecha de Nacimiento:</label>
+                                <time > {userData.dob || "No disponible"} </time>
+
+                                <br />
+                                <a>@REACT </a> 
+                                <a href="#"> #JS </a>
+                                <a href="#">#responsive</a>
+                        </div >
+                        <div className="card-content">
+                            <button className="button is-primary is-responsive" onClick={handleEditMode}>
+                                {editMode ? "Salir de modo Edicion" : "Editar"}
+                            </button>
+                        </div>
+                    </div >
+
+                </div>
+
+    
                 {editMode && (
-                    <form onSubmit={handleSubmit}>
-                        <div>
-                            <label>Email:</label>
-                            <input
-                                type="text"
-                                id="email"
-                                name="email"
-                                value={userData.email}
-                                disabled={true} //{!editMode}
-                            />
+                    <div className="column">
+                        <div className="card"
+                            style={{width: "100%", // Limita el ancho de la imagen al 100% del contenedor
+                                    height: "100%",}}
+                        >
+                            <form onSubmit={handleSubmit}>
+
+                                <div className="card-image">
+                                    <label className="label">Iagen de Perfil:</label>
+                                    <input class="input is-focused"
+                                        type="file"
+                                        accept=".jpg"//"image/*"
+                                        id="image"
+                                        name="image"
+                                        value={image}
+                                        onChange={(e) => setImage(e.target.value)}
+                                        
+                                    />
+                                </div>
+
+                                <div className="card-content">
+                                    <label className="label">Nombre:</label>
+                                    <input class="input is-focused"
+                                        placeholder={userData.first_name}
+                                        type="text"
+                                        id="first_name"
+                                        name="first_name"
+                                        value={first_name}
+                                        onChange={(e) => setFirst_name(e.target.value)}
+                                        
+                                    />
+                                </div>
+
+                                <div className="card-content">
+                                    <label className="label">Apellido:</label>
+                                    <input class="input is-focused"
+                                        placeholder={userData.last_name}
+                                        type="text"
+                                        id="last_name"
+                                        name="last_name"
+                                        value={last_name}
+                                        onChange={(e) => setLast_name(e.target.value)}
+                                        
+                                    />
+                                </div>
+                                
+                                <div className="card-content">
+                                    <label className="label">Email:</label>
+                                    <input class="input is-focused"
+                                        placeholder={userData.email}
+                                        type="text"
+                                        id="email"
+                                        name="email"
+                                        value={userData.email}
+                                        disabled={true} //{!editMode}
+                                    />
+                                </div>
+
+                                <div className="card-content">
+                                    <label className="label">Fecha de Nacimiento:</label>
+                                    <input class="input is-focused"
+                                        placeholder={userData.dob}
+                                        type="text"
+                                        id="dob"
+                                        name="dob"
+                                        value={dob}
+                                        onChange={(e) => setDob(e.target.value)}
+                                    />
+                                </div>
+                                
+                                <div className="card-content">
+                                    <label className="label">Biografía:</label>
+                                    <textarea class="textarea is-focused"
+                                        placeholder={userData.bio}
+                                        id="bio"
+                                        name="bio"
+                                        value={bio}
+                                        onChange={(e) => setBio(e.target.value)}
+                                        disabled={!editMode}
+                                    />
+                                </div>
+                                <div class="field">
+                                    <button className="button is-link" type="submit">Enviar</button>
+                                </div>
+                                
+                            </form>
                         </div>
-                        <div>
-                            <label>Fecha de Nacimiento:</label>
-                            <input
-                                type="text"
-                                id="dob"
-                                name="dob"
-                                value={dob}
-                                onChange={(e) => setDob(e.target.value)}
-                                disabled={!editMode}
-                            />
-                        </div>
-                        <div>
-                            <label>Biografía:</label>
-                            <textarea
-                                id="bio"
-                                name="bio"
-                                value={bio}
-                                onChange={(e) => setBio(e.target.value)}
-                                disabled={!editMode}
-                            />
-                        </div>
-                        <button type="submit">Enviar</button>
-                    </form>
+                </div>
                 )}
                 </>
             ) : (
@@ -165,6 +255,16 @@ function Profile() {
 export default Profile;
 
 /*
+                        <img src={`${import.meta.env.VITE_API_BASE_URL}${userData.state}`}
+                                alt="State icon"
+                                style={{
+                                    height: "20px",
+                                    marginRight: "5px",
+                                    borderRadius: "50%",
+                                        }}
+                        />
+
+
     BOTON MODO EDICION.
     {editMode && (<button onClick={handleEditMode}>
             {!editMode ? "Editar" : "Salir de Modo Edicion"}
@@ -172,7 +272,7 @@ export default Profile;
     )}
 
     return (
-        <div className="card">
+        <div classNameName="card">
             {userData ? (
                 <>
                     <div className="card-content">

@@ -3,15 +3,26 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import MainLayout from './MainLayout'; // import the new layout component
 import SongsPage from './pages/SongsPage';
 import HomePage from './pages/HomePage';
+import Login from './components/Auth/Login';
+import ProfilePage from './pages/ProfilePage';
+import { AuthProvider } from './contexts/AuthContext';
+import PrivateRoute from './components/PrivateRoute';
+
 
 const App = () => (
   <Router>
-    <Routes>
-      <Route path="/" element={<MainLayout />}>
-        <Route index element={<HomePage />} />
-        <Route path="songs" element={<SongsPage />} />
-      </Route>
-    </Routes>
+    <AuthProvider>
+        <Routes>
+
+          <Route path="/" element={<MainLayout />}>
+          <Route index element={<HomePage />} />
+          <Route path="/songs" element={<SongsPage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/profile" element={<PrivateRoute> <ProfilePage /> </PrivateRoute>} />
+
+          </Route>
+        </Routes>
+    </AuthProvider>
   </Router>
 );
 

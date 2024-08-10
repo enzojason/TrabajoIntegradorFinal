@@ -40,6 +40,7 @@ function AuthProvider({ children }) {
         login: (token) => {
             dispatch({ type: ACTIONS.LOGIN, payload: token });
             localStorage.setItem("authToken", token);
+            
             const origin = location.state?.from?.pathname || "/";
             navigate(origin);
         },

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Buscar from '../Music/Buscar.jsx'
 
 const Sidebar = () => (
   <aside className="menu">
@@ -10,8 +11,11 @@ const Sidebar = () => (
       <li><Link to="/artistas">Artistas</Link></li>
       <li><Link to="/albumes">Álbumes</Link></li>
       <li><Link to="/generos">Géneros</Link></li>
-      <li><Link to="/buscar">Buscar</Link></li>
+      
     </ul>
+    <div>
+      <Buscar/>
+    </div>
   </aside>
 );
 

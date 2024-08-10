@@ -80,10 +80,6 @@ function SongList() {
     return (
         <div>
             <div className="my-5">
-                <div>
-                    <Buscar />
-                </div>
-
                 <div className="select">
                     <select onChange={(e) => setType(e.target.value)} value={type}>
                         <option value="song">Canciones</option>

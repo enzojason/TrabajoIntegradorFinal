@@ -47,24 +47,30 @@ function Login() {
             <div className="columns is-centered">
                 <div className="column is-4">
                     <form onSubmit={handleSubmit}>
+
                         <div className="field">
-                            <label htmlFor="username">Nombre de usuario:</label>
-                            <div className="control has-icons-left">
+                            <label className="label" htmlFor="username">Nombre de usuario:</label>
+                            <div className="control has-icons-left has-icons-right">
                                 <input
-                                    className="input"
+                                    className="input is-success"
                                     type="text"
+                                    placeholder="Ingrese Usuario"
                                     id="username"
                                     name="username"
                                     ref={usernameRef}
                                 />
-                                <span className="icon is-small is-left">
-                                    <i className="fas fa-user"></i>
+                                <span class="icon is-small is-left">
+                                <i class="fas fa-user"></i>
+                                </span>
+                                <span class="icon is-small is-right">
+                                <i class="fas fa-check"></i>
                                 </span>
                             </div>
                         </div>
+
                         <div className="field">
-                            <label htmlFor="password">Contraseña:</label>
-                            <div className="control has-icons-left">
+                            <label className="label"  htmlFor="password">Contraseña:</label>
+                            <div className="control has-icons-left has-icons-right">
                                 <input
                                     className="input"
                                     type="password"

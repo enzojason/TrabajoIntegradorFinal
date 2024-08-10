@@ -61,45 +61,66 @@ const SongSearch = () => {
 
   return (
     <div>
-      <div>
-        <label>Filtrar por Género:</label>
-        <select onChange={handleGenreChange} value={selectedGenre}>
-          <option value=''>Todos</option>
-          {genres.map(genre => (
-            <option key={genre.id} value={genre.id}>{genre.name}</option>
-          ))}
-        </select>
+      <div class="field">
+        <label class="label">Filtrar por Género:</label>
+        <div class="control">
+            <div class="select">
+                <select onChange={handleGenreChange} value={selectedGenre}>
+                  <option value=''>Todos</option>
+                  {genres.map(genre => (
+                    <option key={genre.id} value={genre.id}>{genre.name}</option>
+                  ))}
+                </select>
+            </div>
+        </div>
+
+
       </div>
       
-      <div>
-        <label>Filtrar por Artista:</label>
-        <select onChange={handleArtistChange} value={selectedArtist}>
-          <option value=''>Todos</option>
-          {artists.map(artist => (
-            <option key={artist.id} value={artist.id}>{artist.name}</option>
-          ))}
-        </select>
+      <div class="field">
+        <label class="label">Filtrar por Artista:</label>
+        <div class="control">
+            <div class="select">
+                  <select onChange={handleArtistChange} value={selectedArtist}>
+                    <option value=''>Todos</option>
+                    {artists.map(artist => (
+                      <option key={artist.id} value={artist.id}>{artist.name}</option>
+                    ))}
+                </select>
+            </div>
+          </div>
       </div>
 
-      <div>
-        <label>Buscar Canción:</label>
-        <input type="text" onChange={handleSearchTermChange} placeholder="Título de la canción" />
+      <div class="field">
+        <label class="label">Buscar Canción:</label>
+        <input class="input is-focused" type="text" onChange={handleSearchTermChange} placeholder="Título de la canción" />
+      </div >
+
+      <div class="field">
+        <button className="button is-success" onClick={handleSearch}>Buscar</button>
       </div>
 
-      <button className="button is-success" onClick={handleSearch}>Buscar</button>
+      
 
       {searchPerformed && ( // Solo mostrara resultados si se hizo una búsqueda
         <div>
           <h2>Lista de Canciones</h2>
-          <ul>
-            {filteredSongs.length > 0 ? (
-              filteredSongs.map(song => (
-                <li key={song.id}>{song.title}</li>
-              ))
-            ) : (
-              <p>No se encontraron canciones.</p>
-            )}
-          </ul>
+          <div className="column">
+                <div className="columns is-mobile is-2">
+                    {items.slice(0,5).map((item) => (
+                        <div key={item.id} className="column is-one-fifth">
+                            <SongCard 
+                                item={item} 
+                                type={type}
+                                onDelete={() => handleDelete(item.id)} 
+                                onEdit={() => handleEdit(item)} 
+                            />
+                        </div>
+                    ))}
+                </div>
+          </div>
+
+
         </div>
       )}
     </div>
@@ -111,6 +132,17 @@ export default SongSearch;
 
 
 /*
+
+          <ul>
+            {filteredSongs.length > 0 ? (
+              filteredSongs.map(song => (
+                <li key={song.id}>{song.title}</li>
+              ))
+            ) : (
+              <p>No se encontraron canciones.</p>
+            )}
+          </ul>
+
 
 import React, { useState, useEffect } from 'react';
 import { fetchSongs, fetchGenres, fetchArtists } from '../../services/api';

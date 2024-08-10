@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 //import SearchResults from '../components/Music/SearchResults';
 import { fetchSongs } from '../services/api';
 import Buscar from '../components/Music/Buscar'
-import SongsPage from './SongsPage';
+import SongsList from '../components/Music/SongList';
 
 const HomePage = () => {
   const [results, setResults] = useState([]);
@@ -25,10 +25,7 @@ const HomePage = () => {
 
   return (
     <div>
-
-
-      <SongsPage />
-
+      <SongsList />
     </div>
   );
 };
