@@ -1,5 +1,25 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import MainLayout from './MainLayout'; // import the new layout component
+import SongsPage from './pages/SongsPage';
+import HomePage from './pages/HomePage';
+
+const App = () => (
+  <Router>
+    <Routes>
+      <Route path="/" element={<MainLayout />}>
+        <Route index element={<HomePage />} />
+        <Route path="songs" element={<SongsPage />} />
+      </Route>
+    </Routes>
+  </Router>
+);
+
+export default App;
+
+/*
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import HomePage from './pages/HomePage';
 import Login from './components/Auth/Login';
@@ -37,3 +57,4 @@ const App = () => (
 );
 
 export default App;
+*/
