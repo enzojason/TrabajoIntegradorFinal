@@ -4,18 +4,35 @@ import { DataContext } from '../../contexts/DataContext';
 import { useContext } from 'react';
 import SongForm from './SongForm';
 import { useState } from 'react';
+import { deleteComponent } from '../../services/api'; 
 
 const SongCard = ({ item:song }) => {
   const { profileData, isLoading, isError } = useContext(DataContext);
+  const {albumData} = useContext(DataContext);
+  const {artistData} = useContext(DataContext);
 
   const [isCreating, setIsCreating] = useState(false);
-
+  
   const handleSave = () => {
     setIsCreating(false);
   };
 
-const handleDelete = (song) => {
-    console.log("DELETE song ",song);   
+const handleDelete = async (id) => {
+    try{
+      await deleteComponent('songs', id);  
+      console.log("delete song: ",id);
+      console.log("eliminado");
+      alert('Song deleted successfully');
+    }
+    catch(error){
+      alert('Error deleting song: ' + error.message);
+
+    }
+    finally{
+      setIsCreating(false);
+      window.location.reload(); //Rescarga la pagina
+    }
+    
 }
 
   
@@ -40,8 +57,25 @@ if (isError) return <p>Error al cargar las canciones.</p>;
         <div className="media">
           <div className="">
             <p className="title is-4">{song.title}</p>
-            <p className='subtitle is-6'>Año: {song.year}</p>
-            <p className="subtitle is-6">{song.view_count} reproducciones</p>
+            { song.year && <p className='subtitle is-6'>Año: {song.year}</p>}
+            {song.view_count ? <p className="subtitle is-6">{song.view_count} reproducciones</p> : <p>Sin reproducciones</p>}
+            {albumData.map(album =>(
+              album.id === song.album && (
+                <div key={album.id}>
+                  <p>Album: {album.title}</p>
+                </div>
+              )
+            ))}
+            {artistData.map(artista => 
+                  song.artists.includes(artista.id) && (
+                    <div key={artista.id}>
+                      <p>Artista: {artista.name}</p>
+                    </div>
+                  )
+                )}
+
+            <img src={song.cover} alt="" style={{width:'80px',height:'80px'}} />
+            
           </div>
         </div>
         <div className="content">
@@ -59,7 +93,7 @@ if (isError) return <p>Error al cargar las canciones.</p>;
         }
 
       </div>
-    </div>
+    </div> 
     )}
   </div>
     

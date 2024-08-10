@@ -9,20 +9,24 @@ const PlaylistPage = () => {
     const [currentForm,setForm] = useState("");
 
     const handleCreate = () => {
+        //manejador de crear playlist
         setIsCreating(true);
         setForm("playlist");
     };
     const handleCreateEntrie = () => {
+        //manejador de crear entrada
         setIsCreating(true);
         setForm("entrie");
     }
 
     const handleSave = () => {
+        //manejador de guardar playlist
         setIsCreating(false);
         setForm("playlist");
     };
 
     const handleSaveEntrie = () => {
+        //manejador de guardar entrada
         setIsCreating(false);
         setForm("entrie");
     }

@@ -7,10 +7,12 @@ const SongsPage = () => {
   const [isCreating, setIsCreating] = useState(false);
 
   const handleCreate = () => {
+    //manejar la creacion de una nueva cancion
     setIsCreating(true);
   };
 
   const handleSave = () => {
+    //manejar el guardado de una nueva
     setIsCreating(false);
   };
 

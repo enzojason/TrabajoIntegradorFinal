@@ -5,7 +5,12 @@ const AlbumForm = ({ album = {}, onSave }) => {
   const [title, setTitle] = useState(album.title || '');
   const [year, setYear] = useState(album.year || '');
   const [artist, setArtist] = useState(album.artist || '');
+  const [cover, setCover] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
+  const handleImageChange = (e) => {
+    setCover(e.target.files[0]);
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -16,15 +21,25 @@ const AlbumForm = ({ album = {}, onSave }) => {
     formData.append('artist', artist);
 
     console.log("FORM DATA ",formData);
+    
+    if (cover) {
+      formData.append('cover', cover);
+    }
     try {
-      
+      setIsLoading(true);
       const data = await createComponent(formData,"albums"); // Enviamos FormData para crear
       console.log("DATA ",data);
       onSave();
       console.log("guardado");
-      alert('Song saved successfully');
+      setIsLoading(false);
+      alert('Album saved successfully');
+      window.location.reload();
+
     } catch (error) {
-      alert('Error saving song: ' + error.message);
+      setIsLoading(false);
+      alert('Error saving album: ' + error.message);
+      window.location.reload();
+
     }
   };
 
@@ -42,7 +57,17 @@ const AlbumForm = ({ album = {}, onSave }) => {
         <label>Artista: </label>
         <input type="number" value={artist} onChange={(e) => setArtist(e.target.value)} />
       </div>
-      <button type="submit">Guardar</button>
+      <div>
+        <label>Imagen (.png .jpeg)</label>
+        <input type="file" accept=".png, .jpeg, .jpg" onChange={handleImageChange}/>
+
+      </div>
+      {isLoading ? <h1>Cargando...</h1>
+      : 
+      (<div>
+        <button type="submit">Guardar</button>
+        <button onClick={()=>{onSave();}}>Salir</button>
+      </div> )}
     </form>
   );
 };

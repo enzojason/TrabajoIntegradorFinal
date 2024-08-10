@@ -7,10 +7,12 @@ const ArtistPage = () => {
   const [isCreating, setIsCreating] = useState(false);
 
   const handleCreate = () => {
+    //manejador de crear artista
     setIsCreating(true);
   };
 
   const handleSave = () => {
+    //manejador de guardar artista
     setIsCreating(false);
   };
 

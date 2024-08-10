@@ -4,12 +4,15 @@ import React, { useEffect, useState } from 'react';
 import { createComponent } from '../../services/api';
 
 const EntrieForm = ({ entrie = {}, onSave }) => {
+  //Formulario de creacion de entradas de playlist
+
   const [order, setOrder] = useState(entrie.order || '');
   const [playlist, setPlaylist] = useState(entrie.playlist || '');
   const [song,setSong] = useState(entrie.song || '');
 
 
   const handleSubmit = async (e) => {
+    //manejador de datos del formulario
     e.preventDefault();
 
     const formData = new FormData();
@@ -19,8 +22,7 @@ const EntrieForm = ({ entrie = {}, onSave }) => {
 
     console.log("FORM DATA ",formData);
     try {
-      
-      const data = await createComponent(formData,"playlist-entries"); // Enviamos FormData para crear
+      const data = await createComponent(formData,"playlist-entries"); // Enviamos FormData para crear 
       console.log("DATA ",data);
       onSave();
       console.log("guardado");
@@ -46,6 +48,8 @@ const EntrieForm = ({ entrie = {}, onSave }) => {
       </div>
       
       <button type="submit">Guardar</button>
+      <button onClick={()=>{onSave();}}>Salir</button>
+
     </form>
   );
 };

@@ -8,10 +8,12 @@ const AlbumPage = () => {
   const [isCreating, setIsCreating] = useState(false);
 
   const handleCreate = () => {
+    //manejador de crear album
     setIsCreating(true);
   };
 
   const handleSave = () => {
+    //manejador de guardar album
     setIsCreating(false);
   };
 
@@ -23,6 +25,7 @@ const AlbumPage = () => {
     
     <button onClick={handleCreate}>Nuevo Album</button>
     {isCreating ? (<AlbumForm onSave={handleSave} />) : (<ListaElemento ruta="albums" nombre="Albums" ItemComponent={AlbumbCard}/>)}
+    
   </div>
   );
 };

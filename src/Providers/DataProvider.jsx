@@ -25,6 +25,9 @@ const DataProvider = ({ children }) => {
 
           const datasong = await fetchAll('songs');
           setSongData(datasong.results);
+          
+          const dataalbum = await fetchAll('albums');
+          setAlbumData(dataalbum.results);
 
           const dataart = await fetchAll('artists');
           setArtistData(dataart.results);
@@ -32,6 +35,7 @@ const DataProvider = ({ children }) => {
           const dataentries = await fetchAll('playlist-entries');
           setEntriesData(dataentries.results);
           
+
           
 
 
@@ -49,7 +53,7 @@ const DataProvider = ({ children }) => {
     if (isLoading) return <p>Loading...</p>;
     if (isError) return <p>Error fetching data</p>;
 return (
-        <DataContext.Provider value={{ songData, artistData, entriesData, profileData, isLoading, isError }}>
+        <DataContext.Provider value={{ songData, albumData,artistData, entriesData, profileData, isLoading, isError }}>
         {children}
         </DataContext.Provider>
     );

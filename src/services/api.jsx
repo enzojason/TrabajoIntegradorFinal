@@ -63,6 +63,19 @@ export const updateComponent = async (datos,ruta,id) => {
   return data;
 };
 
+export const deleteComponent = async (ruta,id) => {
+  console.log("id song delete ",id);
+  const token = localStorage.getItem("authToken");
+  const response = await fetch(`${API_URL}/${ruta}/${id}/`, {
+    method: 'DELETE',
+    headers: { 
+               'Authorization': `Token ${token}`
+     }
+  });
+  if (!response.ok) throw new Error(response.message);
+  return response;
+};
+
 
 export const fetchAll = async (ruta) => {
   const token = localStorage.getItem("authToken");

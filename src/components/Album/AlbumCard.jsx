@@ -1,31 +1,80 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React from 'react';
+import { useState } from 'react';
 import { DataContext } from '../../contexts/DataContext';
 import { useContext } from 'react';
-
+import { deleteComponent ,updateComponent} from '../../services/api';
+import AlbumForm from './AlbumForm';
 
 const AlbumCard = ({item:album }) => {  
   const { artistData, isLoading, isError } = useContext(DataContext);
+
+  const [isCreating, setIsCreating] = useState(false);
+  
+  
+  const handleSave = () => {
+    setIsCreating(false);
+  };
+
+  const handleDelete = async (id) => {
+    try{
+      await deleteComponent('albums', id);  
+      console.log("delete album: ",id);
+      console.log("eliminado");
+      alert('Album deleted successfully');
+    }
+    catch(error){
+      alert('Error deleting album: ' + error.message);
+
+    }
+    finally{
+      setIsCreating(false);
+      window.location.reload(); //Rescarga la pagina
+    }
+    
+}
+
+const handleEdit = (album) => {
+    setIsCreating(true);  
+    console.log('EDITAR', album);
+    
+  };
+
   if (isLoading) return <p>Cargando...</p>;
   if (isError) return <p>Error al cargar los datos</p>;
 
   return (
     <div>
-        <img src={album.cover} alt="" style={{width:'70px',height:'70px'}} />
-        <p>Albúm: <strong>{album.title}</strong></p>
-  {artistData.map(artist => (
-    artist.id === album.artist && (
-      <div key={artist.id}>
-        <h2>Artista: <strong>{artist.name}</strong></h2>
+        {isCreating ? (<AlbumForm onSave={handleSave} album={album} />) : (
+        <div className="card">
+        <div className="card-content">
+          <div className="media">
+            <div className="">
+                <img src={album.cover} alt="" style={{width:'70px',height:'70px'}} />
+                <p>Albúm: <strong>{album.title}</strong></p>
+              {artistData.map(artist => (
+                artist.id === album.artist && (
+                <div key={artist.id}>
+                  < h2>Artista: <strong>{artist.name}</strong></h2>
+                  <p>Año: {album.year}</p>
+                  <p>Fecha de creación: {new Date(album.created_at).toLocaleDateString()}</p>  
+                </div>
+                )
+              ))}
+             </div>
+             </div>
+              <div className="buttons">
+                <button className="button is-warning" onClick={() => handleEdit(album)}>Editar</button>
+                <button className="button is-danger" onClick={() => handleDelete(album.id)}>Eliminar</button>
+              </div>
+              
 
-        <p>Año: {album.year}</p>
-        <p>Fecha de creación: {new Date(album.created_at).toLocaleDateString()}</p>  
+              </div>
+             </div>  
+        
+        )}
       </div>
-    )
-  ))}
-  <br />
-</div>
 
   );
 };

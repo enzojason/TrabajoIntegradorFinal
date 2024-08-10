@@ -46,15 +46,30 @@ function ListaElemento({ruta,nombre,ItemComponent}) {
         <div>
             <h1><strong>Lista de {nombre}</strong></h1>
             <br />
+
+            <div>
+            {previousPage && (<button onClick={() => fetchPage(previousPage)}>Anterior</button>)}               
+            {nextPage && <button onClick={() =>  fetchPage(nextPage)}>Siguiente</button>}
+            </div>
+
             <ul>
                 {elemento.map((item, index) => (
                 <ItemComponent key={index} item={item} />
                 ))}
             </ul>
+
             <div>
-                {previousPage && <button onClick={() => fetchPage(previousPage)}>Anterior</button>}
-                {nextPage && <button onClick={() => fetchPage(nextPage)}>Siguiente</button>}
+            {previousPage && (<button onClick={() => {
+                fetchPage(previousPage);
+                window.scrollTo({ top: 2, behavior: 'smooth' }); 
+                }}>Anterior</button>)}  
+                          
+            {nextPage && <button onClick={() => { 
+                fetchPage(nextPage);
+                window.scrollTo({ top: 2, behavior: 'smooth' });
+                }}>Siguiente</button>}
             </div>
+            
         </div>
     );
 }

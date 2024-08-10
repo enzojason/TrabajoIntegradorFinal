@@ -1,14 +1,17 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from 'react';
-import { createComponent } from '../../services/api';
+import React, {  useState } from 'react';
+import { createComponent ,updateComponent} from '../../services/api';
 
 const PlaylistForm = ({ playlist = {}, onSave }) => {
+  //Formulario de creacion de playlist
   const [name, setName] = useState(playlist.name || '');
   const [description,setDescription] = useState(playlist.description || '');
+  const [isLoading, setIsLoading] = useState(false);
 
 
   const handleSubmit = async (e) => {
+    //manejador de datos del formulario
     e.preventDefault();
 
     const formData = new FormData();
@@ -17,15 +20,26 @@ const PlaylistForm = ({ playlist = {}, onSave }) => {
 
     console.log("FORM DATA ",formData);
     try {
-      
-      const data = await createComponent(formData,"playlists"); // Enviamos FormData para crear
-      console.log("DATA ",data);
+      setIsLoading(true);
+      if (playlist.id) {
+        await updateComponent(formData,'playlists',playlist.id); // Enviamos FormData para actualizar
+      }
+      else{
+        await createComponent(formData,"playlists"); // Enviamos FormData para crear
+      }
       onSave();
       console.log("guardado");
-      alert('Song saved successfully');
+      alert('Playlist saved successfully');
     } catch (error) {
-      alert('Error saving song: ' + error.message);
+      alert('Error saving playlist: ' + error.message);
     }
+    finally{
+      setIsLoading(false);
+      window.location.reload();
+
+    }
+    
+
   };
 
   return (
@@ -35,12 +49,16 @@ const PlaylistForm = ({ playlist = {}, onSave }) => {
         <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
       </div>
       <div>
-        <label >Bio: </label>
+        <label >Descripción: </label>
         <input type="text" value={description} onChange={(e)=> setDescription(e.target.value)} />
       </div>
-      
-      <button type="submit">Guardar</button>
-    </form>
+      {isLoading ? <h1>Cargando...</h1>
+      : 
+      (<div>
+        <button type="submit">Guardar</button>
+        <button onClick={()=>{onSave();}}>Salir</button>
+      </div> )}    
+      </form>
   );
 };
 
