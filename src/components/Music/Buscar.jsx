@@ -208,85 +208,12 @@ const SongSearch = () => {
           ))}
         </select>
       </div>
+    )}
       
-      <div>
-        <label>Filtrar por Artista:</label>
-        <select onChange={handleArtistChange} value={selectedArtist}>
-          <option value=''>Todos</option>
-          {artists.map(artist => (
-            <option key={artist.id} value={artist.id}>{artist.name}</option>
-          ))}
-        </select>
-      </div>
-
-      <div>
-        <h2>Lista de Canciones</h2>
-        <ul>
-          {filteredSongs.map(song => (
-            <li key={song.id}>{song.title}</li>
-          ))}
-        </ul>
-      </div>
     </div>
   );
 };
 
 export default SongSearch;
 
-/////////////////////////////////////////////
-import React, { useState, useEffect } from 'react';
-import { fetchSongs } from '../../services/api'; // Asegúrate de importar la función correctamente
 
-const SongSearch = () => {
-  const [songs, setSongs] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [filteredSongs, setFilteredSongs] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await fetchSongs();
-        setSongs(data.results);
-        setFilteredSongs(data.results); // Inicialmente, muestra todas las canciones
-      } catch (error) {
-        console.error('Error fetching songs:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const filtered = songs.filter(song => {
-      return song.title.toLowerCase().includes(searchTerm.toLowerCase());
-    });
-    setFilteredSongs(filtered);
-  }, [searchTerm, songs]);
-
-  return (
-    <div>
-      <input 
-        type="text" 
-        placeholder="Buscar por título" 
-        value={searchTerm} 
-        onChange={e => setSearchTerm(e.target.value)} 
-      />
-      <ul>
-        {filteredSongs.length > 0 ? (
-          filteredSongs.map(song => (
-            <li key={song.id}>
-              <h3>{song.title}</h3>
-              <p>Año: {song.year}</p>
-              <p>Duración: {song.duration} segundos</p>
-            </li>
-          ))
-        ) : (
-          <p>No se encontraron canciones que coincidan con la búsqueda.</p>
-        )}
-      </ul>
-    </div>
-  );
-};
-
-export default SongSearch;
-*/
