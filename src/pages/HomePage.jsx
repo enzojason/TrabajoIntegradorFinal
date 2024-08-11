@@ -1,56 +1,29 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-//import SearchBar from '../components/Music/SearchBar';
-//import SearchResults from '../components/Music/SearchResults';
-import { fetchSongs } from '../services/api';
-import Buscar from '../components/Music/Buscar'
-import SongsList from '../components/Music/SongList';
+import SongList from '../components/Music/SongList';
+import SongForm from '../components/Music/SongForm';
 
 const HomePage = () => {
-  const [results, setResults] = useState([]);
+  const [isCreating, setIsCreating] = useState(false);
 
-  const handleSearch = async (query) => {
-    try {
-      const data = await fetchSongs();
-      const filteredResults = data.filter((item) =>
-        item.title.toLowerCase().includes(query.toLowerCase()) ||
-        item.artist.toLowerCase().includes(query.toLowerCase()) ||
-        item.genre.toLowerCase().includes(query.toLowerCase())
-      );
-      setResults(filteredResults);
-    } catch (error) {
-      console.error('Error fetching music:', error);
-    }
+  const handleCreate = () => {
+    setIsCreating(true);
+  };
+
+  const handleSave = () => {
+    setIsCreating(false);
   };
 
   return (
-    <div>
-      <SongsList />
+    <div className='has-text-light'>
+      
+            
+      {isCreating ? (<SongForm onSave={handleSave} />) : 
+      (<div> 
+        <SongList  tipo="song"/>
+        <SongList  tipo="artist" />
+      </div>)}
     </div>
   );
 };
 
 export default HomePage;
-
-/*
-
-import React from 'react';
-import { Link } from 'react-router-dom';
-
-const HomePage = () => {
-  return (
-    <div>
-      <h1>Home</h1>
-      <p>Vienvenido a Salta Music!</p>
-      <Link to="/songs">View Songs</Link>
-      <SearchBar onSearch={handleSearch} />
-      <SearchResults results={results} />
-    </div>
-  );
-};
-
-export default HomePage;
-
-*/
-
-

@@ -44,42 +44,7 @@ function SongList({tipo}) {
         }
     }, [data, filterByUser, user]);
 
-  /*
-    useEffect(() => {
 
-        if (data && Array.isArray(data.results)) {
-            setFilteredItems(data.results);
-            setItems(data.results);
-            setNextPage(data.next);
-            setPreviousPage(data.previous);
-        }else {
-            setFilteredItems([]);
-            setItems([]);
-        }
-    }, [data]);
-
-
-    useEffect(() => {
-        const filtered = items.filter(item => {
-          return item.title ? item.title.toLowerCase().includes(searchTerm.toLowerCase()) : true;
-        });
-        setFilteredItems(filtered);
-      }, [searchTerm, items]);
-*/
-
-    const handleDelete = async (itemId) => {
-        try {
-        await deleteItem(itemId);
-        setItems(items.filter(item => item.id !== itemId)); // Actualizar el estado después de eliminar
-        } catch (error) {
-        alert('Error deleting item: ' + error.message);
-        }
-    };
-
-    const handleEdit = (item) => {
-        setEditingItem(item); // Establece el ítem que se va a editar en el estado
-      };
-    
     const handleSave = () => {
     setEditingItem(null);
     };

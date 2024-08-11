@@ -25,11 +25,12 @@ const Header = () => {
             <img className='is-rounded'
             src={musica} alt="Logo" />
           </Link>
+          <a className ="button" ><Link to="/">Home</Link></a>
         </div>
 
         {isAuthenticated ? (
                           <>
-                            <a className ="button" ><Link to="/">Home</Link></a>
+                            
                             <div className="navbar-end">
                               <Link to="/profile" className="navbar-item">
 
@@ -57,29 +58,3 @@ const Header = () => {
 };
 
 export default Header;
-
-/*
-import React, { useContext } from 'react';
-import { AuthContext } from '../../contexts/AuthContext';
-
-const isAuthenticated = localStorage.getItem("authToken") !== null;
-
-const Header = () => {
-    const { authState } = useContext(AuthContext);
-
-    return (
-        <div>
-            {isAuthenticated ? (
-                <p>El usuario está autenticado.</p>
-            ) : (
-                <p>El usuario no está autenticado.</p>
-            )}
-        </div>
-    );
-};
-
-export default Header;
-*/
-
-
-

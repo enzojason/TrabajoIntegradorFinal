@@ -6,20 +6,26 @@ const Sidebar = () => (
   <aside className="is-dark">
     <div className="brand">
       <p className="title is-3 has-text-white">Recursos</p>
-      <ul>
-         <li>  <Link to="/songsForm">Nueva Canción</Link> </li>
+      <div className="column is-15">
+        <nav>
+          <aside className='menu'>
+          <ul className='menu-list'>
+          <li><Link to="/buscar">Buscar Canciones</Link></li>
+          <div className='column .is-offset-x'></div>
+          <div className='column .is-offset-x'></div>
+
          <li>  <Link to="/songs">Canciones</Link> </li>
+         <li>  <Link to="/albums">Albunes</Link> </li>         
          <li>  <Link to="/playlists">Playlists</Link> </li>
-         <li>  <Link to="/artistas">Artistas</Link> </li>
-         <li>  <Link to="/albumes">Álbumes</Link> </li>
-         <li>  <Link to="/generos">Géneros</Link> </li>
+         <li>  <Link to="/artists">Artistas</Link> </li>
+         <li>  <Link to="/genres">Géneros</Link> </li>
       </ul>
+          </aside>
+        </nav>
+      
+      </div>
     </div>
 
-
-    <div>
-      <Buscar/>
-    </div>
   </aside>
 );
 

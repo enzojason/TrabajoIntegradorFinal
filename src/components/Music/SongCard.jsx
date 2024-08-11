@@ -20,7 +20,7 @@ const SongCard = ({ item, type, onDelete, onEdit }) => {
               
                 <div className="media">
                         <div className="media-content">
-                          <p className="title is-4" style={{ overflow: 'auto', maxHeight: '100px' }}>{item.title}</p>
+                          <p className="title is-5" style={{  maxHeight: '100px' }}>{item.title}</p>
                           {/* <p className="subtitle is-6">{item.artist}</p>*/}
                         </div>
                     </div>
@@ -52,7 +52,7 @@ const SongCard = ({ item, type, onDelete, onEdit }) => {
             
               <div className="media">
                       <div className="media-content ">
-                        <p className="title is-6 has-text-link" style={{ overflow: 'auto', maxHeight: '100px' }}>{item.title}</p>
+                        <p className="title is-6 has-text-link" style={{ maxHeight: '100px' }}>{item.title}</p>
                       </div>
               </div>
                 
@@ -84,7 +84,7 @@ const SongCard = ({ item, type, onDelete, onEdit }) => {
 
             <div className="media">
                 <div className="media-content">
-                  <p className="title is-6" style={{ overflow: 'auto', maxHeight: '100px' }}>{item.name}</p>
+                  <p className="title is-6" style={{  maxHeight: '100px' }}>{item.name}</p>
                 </div>
             </div>
 
@@ -192,9 +192,7 @@ const SongCard = ({ item, type, onDelete, onEdit }) => {
             <div className="buttons">
               {type === 'song' && (
                 <>
-                  <button className="button is-warning" onClick={() => onEdit(song)}>Editar</button>
-                  <button className="button is-danger" onClick={() => onDelete(song.id)}>Eliminar</button>
-                </>
+                 </>
               )}
             </div>
         </div>
@@ -202,33 +200,3 @@ const SongCard = ({ item, type, onDelete, onEdit }) => {
 };
 
 export default SongCard;
-/*
-import React from 'react';
-
-const SongCard = ({ song, onDelete, onEdit }) => {
-  return (
-    <div className="card">
-      <div className="card-content">
-        <div className="media">
-          <div className="media-content">
-            <p className="title is-4">{song.title}</p>
-            <p className="subtitle is-6">{song.artist}</p>
-          </div>
-        </div>
-        <div className="content">
-          <audio controls>
-            <source src={song.song_file} type="audio/mpeg" />
-            Tu navegador no soporta el elemento de audio.
-          </audio>
-        </div>
-        <div className="buttons">
-          <button className="button is-warning" onClick={() => onEdit(song)}>Editar</button>
-          <button className="button is-danger" onClick={() => onDelete(song.id)}>Eliminar</button>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default SongCard;
-*/
