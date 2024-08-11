@@ -1,5 +1,7 @@
-import { createContext, useReducer, useContext } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { createContext, useReducer, useContext, useEffect } from "react";
+import { useLocation} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 
 const AuthContext = createContext({
     state: {},
@@ -9,6 +11,7 @@ const AuthContext = createContext({
 const ACTIONS = {
     LOGIN: "LOGIN",
     LOGOUT: "LOGOUT",
+    SET_USER: "SET_USER",
 };
 
 function reducer(state, action) {
@@ -21,7 +24,14 @@ function reducer(state, action) {
             };
         case ACTIONS.LOGOUT:
             return {
+                token: null,
                 isAuthenticated: false,
+                user: null,
+            };
+        case ACTIONS.SET_USER:
+            return {
+                ...state,
+                user: action.payload,
             };
         default:
             return state;
@@ -31,10 +41,33 @@ function reducer(state, action) {
 function AuthProvider({ children }) {
     const [state, dispatch] = useReducer(reducer, {
         token: localStorage.getItem("authToken"),
-        isAuthenticated: localStorage.getItem("authToken") ? true : false,
+        isAuthenticated: localStorage.getItem("authToken") ? true : false, //isAuthenticated: !!localStorage.getItem("authToken"), //? true : false,
+        user: null,
     });
     const navigate = useNavigate();
     const location = useLocation();
+
+    useEffect(() => {
+        if (state.token) {
+            fetchUserData(state.token);
+        }
+    }, [state.token]);
+
+    const fetchUserData = (token) => {
+        fetch(`${import.meta.env.VITE_API_BASE_URL}users/profiles/profile_data/`, {
+            method: "GET",
+            headers: {
+                "Authorization": `Token ${token}`
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            dispatch({ type: ACTIONS.SET_USER, payload: data });
+        })
+        .catch(error => {
+            console.error("Error fetching user data:", error);
+        });
+    };
 
     const actions = {
         login: (token) => {

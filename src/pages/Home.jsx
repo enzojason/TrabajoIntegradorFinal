@@ -16,13 +16,9 @@ const SongsPage = () => {
   return (
     <div className='has-text-light'>
       
-      <button className="button is-link is-inverted" onClick={handleCreate}>Nueva Cancion</button>
+      <button class="button is-link is-inverted" onClick={handleCreate}>Nueva Cancion</button>
       
-      {isCreating ? (<SongForm onSave={handleSave} />) : 
-      (<div> 
-        <SongList  tipo="song"/>
-        <SongList  tipo="artist" />
-      </div>)}
+      {isCreating ? (<SongForm onSave={handleSave} />) : (<SongList />)}
     </div>
   );
 };

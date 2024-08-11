@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 //import SearchResults from '../components/Music/SearchResults';
 import { fetchSongs } from '../services/api';
 import Buscar from '../components/Music/Buscar'
+import SongsList from '../components/Music/SongList';
 
 const HomePage = () => {
   const [results, setResults] = useState([]);
@@ -24,13 +25,7 @@ const HomePage = () => {
 
   return (
     <div>
-      
-      <p>Vienvenido a Salta Music!</p>
-      <Link to="/songs">Ver Canciones</Link>
-
-      <Link to="/buscar">Buscar Canciones</Link>
-      <Buscar onSearch={handleSearch} />
-
+      <SongsList />
     </div>
   );
 };

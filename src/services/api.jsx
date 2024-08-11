@@ -15,21 +15,16 @@ export const loginUser = async (username, password) => {
 // Para El perfil
 export const getProfile = async (token) => {
   const response = await fetch(`${API_URL}/users/profiles/profile_data/`, {
-    headers: { Authorization: `Bearer ${token}` }
+
+    headers: { Authorization: `Token ${token}` }
   });
   const data = await response.json();
   if (!response.ok) throw new Error(data.message);
   return data;
 };
 
-/*
-export const fetchMusic = async () => {
-  const response = await fetch(`${API_URL}/music/`);
-  const data = await response.json();
-  if (!response.ok) throw new Error(data.message);
-  return data;
-};
-*/
+
+
 
 // Para canciones-Songs (Crear,Leer, Modificar, Eliminar)
 export const createSong = async (songData) => {
