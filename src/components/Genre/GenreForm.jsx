@@ -39,6 +39,7 @@ const GenreForm = ({ genero = {}, onSave }) => {
         <input type="text" value={description} onChange={(e)=> setDescription(e.target.value)} />
       </div>
       <button type="submit">Guardar</button>
+      <button onClick={()=>{onSave();}}>Salir</button>
     </form>
   );
 };

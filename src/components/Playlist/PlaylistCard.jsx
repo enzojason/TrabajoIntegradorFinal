@@ -62,7 +62,7 @@ const handleEdit = (playlist) => {
     
   };
   const handleDeleteEntry = async (id) => {
-    //manejadaor de eliminar entrada de una playlist
+    //manejadaor de eliminar entrada de una playlisty
     try{
       await deleteComponent('playlist-entries', id);  
       console.log("delete song: ",id);
@@ -83,6 +83,7 @@ const handleEdit = (playlist) => {
   if (isLoading) return <p>Cargando...</p>;
   if (isError) return <p>Error al cargar los datos</p>;
   
+  //<SongCard item={song} />
 
   return (
     

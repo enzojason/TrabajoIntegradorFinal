@@ -39,15 +39,14 @@ function ListaElemento({ruta,nombre,ItemComponent}) {
         setPreviousPage(data.previous);
     };
 
-    if (isLoading) return <p>Cargando...</p>;
+    //<div className='loader'></div>
+
+    if (isLoading) return <p className="center-mixin">Cargando...</p>;
     if (isError) return <p>Error al cargar {nombre}</p>;
     if (!data) return <p>No hay {nombre} disponibles</p>;
 
     return (
         <div>
-            <h1><strong>Lista de {nombre}</strong></h1>
-            <br />
-
             <div>
             {previousPage && (<button onClick={() => fetchPage(previousPage)}>Anterior</button>)}               
             {nextPage && <button onClick={() =>  fetchPage(nextPage)}>Siguiente</button>}

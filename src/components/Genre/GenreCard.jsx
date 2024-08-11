@@ -7,8 +7,8 @@ const GenreCard = ({item:genres }) => {
     <div>
       <p ><strong>{genres.name}</strong></p>
       <p >{genres.description}</p>
-      <p >Creado en: {genres.created_at}</p>
-      <p >Ultima Actualización: {genres.updated_at} </p>
+      <p >Creado en: {new Date(genres.created_at).toLocaleDateString()}</p>
+      <p >Ultima Actualización: {new Date(genres.updated_at).toLocaleDateString()} </p>
       <br />
     </div>
   );

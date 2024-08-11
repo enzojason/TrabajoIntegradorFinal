@@ -1,5 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
+
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import HomePage from './pages/HomePage';
@@ -28,32 +29,37 @@ const App = () => (
   <Router>
     <AuthProvider>
     <DataProvider>  
-      <SidebarLeft />
-      <SidebarRight/>
-      
-      <main>
-      
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/profile" element={<PrivateRoute> <ProfilePage /> </PrivateRoute>} />
-          
-          <Route path="/songs" element={<SongsPage />} />
-          <Route path="/albums" element={<AlbumPage />} />
-          <Route path="/artists" element={<ArtistPage />} />
-          <Route path="/playlists" element={<PlaylistPage />} />
-          <Route path="/genres" element={<GenresPage />} />
-          <Route path='/info' element={<InfoPage/>}/>
+      <div className='columns'>
+        <SidebarLeft />
+        
+        <main className='column'>
+        
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/profile" element={<PrivateRoute> <ProfilePage /> </PrivateRoute>} />
+            
+            <Route path="/songs" element={<SongsPage />} />
+            <Route path="/albums" element={<AlbumPage />} />
+            <Route path="/artists" element={<ArtistPage />} />
+            <Route path="/playlists" element={<PlaylistPage />} />
+            <Route path="/genres" element={<GenresPage />} />
+            <Route path='/info' element={<InfoPage/>}/>
 
-          <Route path="/buscar" element={<Buscar />} />
+            <Route path="/buscar" element={<Buscar />} />
 
 
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
 
-      </main>
-      
+        </main>
+
+        <SidebarRight />
+
+      </div>
+
       <Footer />
+
       </DataProvider>
     </AuthProvider>
   </Router>

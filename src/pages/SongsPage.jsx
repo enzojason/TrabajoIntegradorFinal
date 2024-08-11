@@ -20,9 +20,16 @@ const SongsPage = () => {
 
   return (
     <div>
-      <h1>Canciones</h1>
+      <section className="hero is-primary">
+          <div className="hero-body">
+          <p className="title">Canciones</p>
+          <p className="subtitle">lista de todas las canciones</p>
+          </div>
+        </section>
+        <div className='buttons'>
+          <button onClick={handleCreate} className='button'>Nueva cancion</button>
+        </div>
       
-      <button onClick={handleCreate}>Nueva Cancion</button>
       {isCreating ? (<SongForm onSave={handleSave} />) : (<ListaElemento ruta="songs" nombre="Songs" ItemComponent={SongCard} />)}
     </div>
   );

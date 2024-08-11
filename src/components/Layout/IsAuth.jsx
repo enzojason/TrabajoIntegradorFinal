@@ -11,7 +11,7 @@ const IsAuth = () => {
   return (
     
         <div>
-          <Link to="/">Home Derecho</Link>
+          <Link to="/">Home</Link>
         {isAuthenticated ? (
           <div>
             <Link to="/profile"> Perfil </Link>
@@ -20,6 +20,7 @@ const IsAuth = () => {
             </div>
         ) : (
           <div>
+            
           <Link to="/login">Iniciar Sesion</Link>
           </div>
         )}

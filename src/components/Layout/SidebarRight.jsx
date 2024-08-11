@@ -3,15 +3,21 @@ import IsAuth from './IsAuth';
 const SidebarRight = () => {
   //componente de la barra lateral derecha, muestra las rutas de perfil y autenticacion
     return (
-        <aside>
+      <div className='column is-one-fifth'>
+        <div className='column .is-offset-x'></div>
+        
+        <div className='colum is-11'>
           <nav>
-            <ul>
-              <li><Link to="/profile">Perfil</Link></li>
-            <li><IsAuth/></li>
-              <li></li>
-            </ul>
+            <aside className='menu'>  
+              <ul className='menu-list'> 
+              <br />
+              <li><IsAuth/></li>
+              </ul>            
+            </aside>
           </nav>
-        </aside>
+        </div>
+        
+      </div>
       );
 }
 
