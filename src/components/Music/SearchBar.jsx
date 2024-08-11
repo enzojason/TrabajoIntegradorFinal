@@ -16,7 +16,7 @@ const SearchBar = ({ onSearch }) => {
         onChange={(e) => setQuery(e.target.value)} 
         placeholder="Search for songs, artists, or genres..." 
       />
-      <button type="submit">Search</button>
+      <button type="submit">Buscar</button>
     </form>
   );
 };
