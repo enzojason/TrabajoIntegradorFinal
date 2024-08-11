@@ -5,13 +5,13 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import Buscar from "./Buscar"
 
-function SongList() {
+function SongList({tipo}) {
     const { user } = useAuth("state");
     //const { user } = state;
 
-    const [type, setType] = useState('song'); // Estado para el tipo de contenido (por defecto filta por canción.)
+    const [type, setType] = useState(tipo); // Estado para el tipo de contenido (por defecto filta por canción.)
     const [{ data, isError, isLoading }, doFetch] = useFetch(
-        `https://sandbox.academiadevelopers.com/harmonyhub/${type}s/?page_size=200`, // Cambia la URL según el tipo  (?page_size=100)
+        `https://sandbox.academiadevelopers.com/harmonyhub/${type}s/?page_size=300`, // Cambia la URL según el tipo  (?page_size=100)
         {}
     );
 
@@ -99,15 +99,7 @@ function SongList() {
     return (
         <div>
             <div className="my-5">
-                <div className="select">
-                    <select onChange={(e) => setType(e.target.value)} value={type}>
-                        <option value="song">Canciones</option>
-                        <option value="album">Álbumes</option>
-                        <option value="artist">Artistas</option>
-                        <option value="playlist">Playlists</option>
-                        <option value="genre">Géneros</option>
-                    </select>
-                </div>
+
 
                 {user && (
                     <div className="field">
@@ -120,9 +112,6 @@ function SongList() {
                         <label htmlFor="filterByUser">Filtrar por mi usuario</label>
                     </div>
                 )}
-
-                <h2 className="title">Lista de {type.charAt(0).toUpperCase() + type.slice(1)}s</h2>
-                <h2 className="title">Lista de {type}</h2>
 
                 <div className="columns is-vcentered is-mobile">
 
@@ -169,3 +158,17 @@ function SongList() {
 }
 
 export default SongList;
+
+/*
+                <div className="select">
+                    <select onChange={(e) => setType(e.target.value)} value={type}>
+                        <option value="song">Canciones</option>
+                        <option value="album">Álbumes</option>
+                        <option value="artist">Artistas</option>
+                        <option value="playlist">Playlists</option>
+                        <option value="genre">Géneros</option>
+                    </select>
+                </div>
+                                <h2 className="title">Lista de {type.charAt(0).toUpperCase() + type.slice(1)}s</h2>
+                <h2 className="title">Lista de {type}</h2>
+*/

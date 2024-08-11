@@ -1,8 +1,8 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import Sidebar from './components/Layout/Sidebar';
-import Header from './components/Layout/Header';
-import Footer from './components/Layout/Footer';
+import Sidebar from './Sidebar';
+import Header from './Header';
+import Footer from './Footer';
 
 const MainLayout = () => (
   <>

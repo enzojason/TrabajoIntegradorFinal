@@ -1,10 +1,11 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import MainLayout from './MainLayout';
+import MainLayout from './components/Layout/MainLayout';
 import SongsPage from './pages/SongsPage';
 import Login from './components/Auth/Login';
 import ProfilePage from './pages/ProfilePage';
 import PrivateRoute from './components/PrivateRoute';
+import Buscar from './components/Music/Buscar'
 
 const AppRoutes = () => (
   <Routes>
@@ -14,6 +15,8 @@ const AppRoutes = () => (
       <Route path="/songsForm" element={<SongsPage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/profile" element={<PrivateRoute> <ProfilePage /> </PrivateRoute>} />
+      <Route path="/buscar" element={<Buscar />} />
+
     </Route>
   </Routes>
 );

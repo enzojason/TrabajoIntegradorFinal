@@ -18,7 +18,11 @@ const SongsPage = () => {
       
       <button className="button is-link is-inverted" onClick={handleCreate}>Nueva Cancion</button>
       
-      {isCreating ? (<SongForm onSave={handleSave} />) : (<SongList />)}
+      {isCreating ? (<SongForm onSave={handleSave} />) : 
+      (<div> 
+        <SongList  tipo="song"/>
+        <SongList  tipo="artist" />
+      </div>)}
     </div>
   );
 };
