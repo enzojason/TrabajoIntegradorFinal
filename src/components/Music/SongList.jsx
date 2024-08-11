@@ -2,30 +2,49 @@ import useFetch from "../../hooks/useFetch";
 import SongCard from "./SongCard";
 import SongForm from './SongForm';
 import { useEffect, useState } from "react";
+import { useAuth } from "../../contexts/AuthContext";
 import Buscar from "./Buscar"
 
 function SongList() {
-    const [type, setType] = useState('song'); // Estado para el tipo de contenido
+    const { user } = useAuth("state");
+    //const { user } = state;
+
+    const [type, setType] = useState('song'); // Estado para el tipo de contenido (por defecto filta por canción.)
     const [{ data, isError, isLoading }, doFetch] = useFetch(
-        `https://sandbox.academiadevelopers.com/harmonyhub/${type}s/`, // Cambia la URL según el tipo  (?page_size=100)
+        `https://sandbox.academiadevelopers.com/harmonyhub/${type}s/?page_size=200`, // Cambia la URL según el tipo  (?page_size=100)
         {}
     );
 
     const [items, setItems] = useState([]);
     const [nextPage, setNextPage] = useState(null);
     const [previousPage, setPreviousPage] = useState(null);
+    const [filterByUser, setFilterByUser] = useState(false);
 
     const [isCreating, setIsCreating] = useState(false);
     //const [searchTerm, setSearchTerm] = useState('');
     const [filteredItems, setFilteredItems] = useState([]);
-    
     const [editingItem, setEditingItem] = useState(null);
     
 
     useEffect(() => {
         doFetch();
-    }, [type]); // Refetch cuando cambia el tipo
+    }, [type]); // Hace un Refetch cuando cambia el tipo
 
+    useEffect(() => {
+        if (data && Array.isArray(data.results)) {
+            let filteredData = data.results;
+            if (filterByUser && user) {
+                filteredData = filteredData.filter(item => item.owner === user.user__id);
+            }
+            setItems(filteredData);
+            setNextPage(data.next);
+            setPreviousPage(data.previous);
+        } else {
+            setItems([]);
+        }
+    }, [data, filterByUser, user]);
+
+  /*
     useEffect(() => {
 
         if (data && Array.isArray(data.results)) {
@@ -39,7 +58,7 @@ function SongList() {
         }
     }, [data]);
 
-  /*
+
     useEffect(() => {
         const filtered = items.filter(item => {
           return item.title ? item.title.toLowerCase().includes(searchTerm.toLowerCase()) : true;
@@ -61,9 +80,9 @@ function SongList() {
         setEditingItem(item); // Establece el ítem que se va a editar en el estado
       };
     
-      const handleSave = () => {
-        setEditingItem(null);
-      };
+    const handleSave = () => {
+    setEditingItem(null);
+    };
 
     const fetchPage = async (url) => {
         const response = await fetch(url);
@@ -90,7 +109,20 @@ function SongList() {
                     </select>
                 </div>
 
+                {user && (
+                    <div className="field">
+                        <input 
+                            type="checkbox" 
+                            id="filterByUser" 
+                            checked={filterByUser}
+                            onChange={(e) => setFilterByUser(e.target.checked)}
+                        />
+                        <label htmlFor="filterByUser">Filtrar por mi usuario</label>
+                    </div>
+                )}
+
                 <h2 className="title">Lista de {type.charAt(0).toUpperCase() + type.slice(1)}s</h2>
+                <h2 className="title">Lista de {type}</h2>
 
                 <div className="columns is-vcentered is-mobile">
 

@@ -61,10 +61,10 @@ const SongSearch = () => {
 
   return (
     <div>
-      <div class="field">
-        <label class="label">Filtrar por Género:</label>
-        <div class="control">
-            <div class="select">
+      <div className="field">
+        <label className="label">Filtrar por Género:</label>
+        <div className="control">
+            <div className="select">
                 <select onChange={handleGenreChange} value={selectedGenre}>
                   <option value=''>Todos</option>
                   {genres.map(genre => (
@@ -77,10 +77,10 @@ const SongSearch = () => {
 
       </div>
       
-      <div class="field">
-        <label class="label">Filtrar por Artista:</label>
-        <div class="control">
-            <div class="select">
+      <div className="field">
+        <label className="label">Filtrar por Artista:</label>
+        <div className="control">
+            <div className="select">
                   <select onChange={handleArtistChange} value={selectedArtist}>
                     <option value=''>Todos</option>
                     {artists.map(artist => (
@@ -91,12 +91,12 @@ const SongSearch = () => {
           </div>
       </div>
 
-      <div class="field">
-        <label class="label">Buscar Canción:</label>
-        <input class="input is-focused" type="text" onChange={handleSearchTermChange} placeholder="Título de la canción" />
+      <div className="field">
+        <label className="label">Buscar Canción:</label>
+        <input className="input is-focused" type="text" onChange={handleSearchTermChange} placeholder="Título de la canción" />
       </div >
 
-      <div class="field">
+      <div className="field">
         <button className="button is-success" onClick={handleSearch}>Buscar</button>
       </div>
 

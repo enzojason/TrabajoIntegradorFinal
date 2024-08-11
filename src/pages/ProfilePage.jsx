@@ -104,7 +104,7 @@ function Profile() {
                 <div className="column">
 
                     <div className="card"
-                        style={{width: "700px", // Limita el ancho de la imagen al 100% del contenedor
+                        style={{width: "700px", 
                                 height: "100%",}}
                         >
                         <div className="card-image">
@@ -157,7 +157,7 @@ function Profile() {
                 {editMode && (
                     <div className="column">
                         <div className="card"
-                            style={{width: "100%", // Limita el ancho de la imagen al 100% del contenedor
+                            style={{width: "100%", 
                                     height: "100%",}}
                         >
                             <form onSubmit={handleSubmit}>
@@ -171,7 +171,6 @@ function Profile() {
                                         name="image"
                                         value={image}
                                         onChange={(e) => setImage(e.target.value)}
-                                        
                                     />
                                 </div>
 

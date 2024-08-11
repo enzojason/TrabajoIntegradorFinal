@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { createSong, updateSong } from '../../services/api';
 
 const SongForm = ({ song = {}, onSave }) => {
+  const [cover, setCover] = useState(song.cover || '');
   const [title, setTitle] = useState(song.title || '');
   const [year, setYear] = useState(song.year || '');
   const [album, setAlbum] = useState(song.album || '');
@@ -36,25 +37,49 @@ const SongForm = ({ song = {}, onSave }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>Título</label>
-        <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} required />
-      </div>
-      <div>
-        <label>Año</label>
-        <input type="number" value={year} onChange={(e) => setYear(e.target.value)} required />
-      </div>
-      <div>
-        <label>Álbum</label>
-        <input type="number" value={album} onChange={(e) => setAlbum(e.target.value)} />
-      </div>
-      <div>
-        <label>Canción (archivo .mp3)</label>
-        <input type="file" accept=".mp3" onChange={handleFileChange} />
-      </div>
-      <button type="submit">Guardar</button>
-    </form>
+    <div className="card"
+    style={{width: "700px",
+      height: "100%",}}>
+      <form onSubmit={handleSubmit}>
+          <div className="card-content">
+                <label className="label">Iagen de Portada:</label>
+                <input class="input is-focused"
+                    type="file"
+                    accept=".jpg"//"image/*"
+                    id="cover"
+                    name="cover"
+                    value={cover}
+                    onChange={(e) => setCover(e.target.value)}
+                    
+                />
+          </div>
+
+          <div className="card-content">
+            <label className='label' >Título</label>
+            <input class="input is-focused" type="text" value={title} onChange={(e) => setTitle(e.target.value)} required />
+          </div>
+
+          <div className="card-content">
+            <label className='label'>Año</label>
+            <input class="input is-focused" type="number" value={year} onChange={(e) => setYear(e.target.value)} required />
+          </div>
+
+          <div className="card-content">
+            <label className='label'>Álbum</label>
+            <input class="input is-focused" type="number" value={album} onChange={(e) => setAlbum(e.target.value)} />
+          </div>
+
+          <div className="card-content">
+            <label className='label'>Canción (Archivo .mp3)</label>
+            <input class="input is-focused" type="file" accept=".mp3" onChange={handleFileChange} />
+          </div>
+
+          <div  class="field">
+            <button className="button is-link" type="submit">Guardar</button>
+          </div>
+          
+      </form>
+    </div>
   );
 };
 
