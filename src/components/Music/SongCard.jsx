@@ -8,7 +8,7 @@ const SongCard = ({ item, type, onDelete, onEdit }) => {
     switch (type) {
       case 'song':
         return (
-          <div class="card">
+          <div className="card">
                 <div className="card-image">
                   <figure className="image is-4by3">
                     <img
@@ -18,10 +18,10 @@ const SongCard = ({ item, type, onDelete, onEdit }) => {
                   </figure>
                 </div>
               
-                <div class="media">
-                        <div class="media-content">
-                          <p class="title is-4" style={{ overflow: 'auto', maxHeight: '100px' }}>{item.title}</p>
-                          {/* <p class="subtitle is-6">{item.artist}</p>*/}
+                <div className="media">
+                        <div className="media-content">
+                          <p className="title is-4" style={{ overflow: 'auto', maxHeight: '100px' }}>{item.title}</p>
+                          {/* <p className="subtitle is-6">{item.artist}</p>*/}
                         </div>
                     </div>
 
@@ -37,7 +37,7 @@ const SongCard = ({ item, type, onDelete, onEdit }) => {
         );
       case 'album':
         return (
-          <div class="card"
+          <div className="card"
               style={{width: "100%", 
                       height: "100%",}}
           >
@@ -50,21 +50,21 @@ const SongCard = ({ item, type, onDelete, onEdit }) => {
                 </figure>
               </div>
             
-              <div class="media">
+              <div className="media">
                       <div className="media-content ">
                         <p className="title is-6 has-text-link" style={{ overflow: 'auto', maxHeight: '100px' }}>{item.title}</p>
                       </div>
               </div>
                 
-              <div class="media">
-                      <div class="media-content">
-                        <p class="subtitle is-6 ">Año: {item.year}</p>
+              <div className="media">
+                      <div className="media-content">
+                        <p className="subtitle is-6 ">Año: {item.year}</p>
                       </div>
               </div>
 
-              <div class="media">
-                      <div class="media-content">
-                        <p class="subtitle is-6 has-text-info">Creado: {item.created_at}</p>
+              <div className="media">
+                      <div className="media-content">
+                        <p className="subtitle is-6 has-text-info">Creado: {item.created_at}</p>
                       </div>
               </div>
           </div>
@@ -73,7 +73,7 @@ const SongCard = ({ item, type, onDelete, onEdit }) => {
         );
       case 'artist':
         return (
-        <div class="card"
+        <div className="card"
           style={{width: "100%", 
                 height: "100%",}}>
             <div className="card-image">
@@ -82,27 +82,27 @@ const SongCard = ({ item, type, onDelete, onEdit }) => {
               </figure>
             </div>
 
-            <div class="media">
-                <div class="media-content">
-                  <p class="title is-6" style={{ overflow: 'auto', maxHeight: '100px' }}>{item.name}</p>
+            <div className="media">
+                <div className="media-content">
+                  <p className="title is-6" style={{ overflow: 'auto', maxHeight: '100px' }}>{item.name}</p>
                 </div>
             </div>
 
-            <div class="media"
+            <div className="media"
             style={{height: "50px",}}>
-                <div class="media-content">
-                  <p class="subtitle is-6" style={{ overflow: 'auto', maxHeight: '60px' }}>{item.bio}</p>
+                <div className="media-content">
+                  <p className="subtitle is-6" style={{ overflow: 'auto', maxHeight: '60px' }}>{item.bio}</p>
                 </div>
             </div>
 
-            <div class="media">
-                <div class="media-content">
+            <div className="media">
+                <div className="media-content">
                 <a href={item.website} className="button is-link">Website</a>
                 </div>
             </div>
 
-            <div class="media">
-                <div class="media-content">
+            <div className="media">
+                <div className="media-content">
                 <p className="subtitle is-6">Actualizado: {item.updated_at}</p>
                 </div>
             </div>
@@ -111,37 +111,37 @@ const SongCard = ({ item, type, onDelete, onEdit }) => {
         );
       case 'playlist':
         return (
-          <div class="card"
+          <div className="card"
           style={{width: "100%", 
                   height: "100%",}}
           >
-              <div class="media">
+              <div className="media">
                       <div className="media-content ">
                         <p className="title is-6 has-text-link" >{item.name}</p>
                       </div>
               </div>
                 
-              <div class="media">
-                      <div class="media-content">
-                        <p class="subtitle is-6 " style={{ overflow: 'auto', maxHeight: '100px' }}>Descripción: {item.description}</p>
+              <div className="media">
+                      <div className="media-content">
+                        <p className="subtitle is-6 " style={{ overflow: 'auto', maxHeight: '100px' }}>Descripción: {item.description}</p>
                       </div>
               </div>
 
-              <div class="media">
-                      <div class="media-content">
-                        <p class="subtitle is-6 has-text-info">Creado: {item.created_at}</p>
+              <div className="media">
+                      <div className="media-content">
+                        <p className="subtitle is-6 has-text-info">Creado: {item.created_at}</p>
                       </div>
               </div>
 
-              <div class="media">
-                      <div class="media-content">
-                        <p class="subtitle is-6 has-text-info">Actualizado: {item.updated_at}</p>
+              <div className="media">
+                      <div className="media-content">
+                        <p className="subtitle is-6 has-text-info">Actualizado: {item.updated_at}</p>
                       </div>
               </div>
 
-              <div class="media">
-                      <div class="media-content">
-                        <p class="subtitle is-6 has-text-info">Entradas: {item.entries}</p>
+              <div className="media">
+                      <div className="media-content">
+                        <p className="subtitle is-6 has-text-info">Entradas: {item.entries}</p>
                       </div>
               </div>
           </div>
@@ -152,31 +152,31 @@ const SongCard = ({ item, type, onDelete, onEdit }) => {
         );
       case 'genre':
         return (
-          <div class="card"
+          <div className="card"
           style={{width: "100%", 
                   height: "100%",}}
           >
-              <div class="media">
+              <div className="media">
                       <div className="media-content ">
                         <p className="title is-5 has-text-link" >{item.name}</p>
                       </div>
               </div>
                 
-              <div class="media">
-                      <div class="media-content">
-                        <p class="subtitle is-6" style={{ overflow: 'auto', maxHeight: '100px' }}>Descripción: {item.description}</p>
+              <div className="media">
+                      <div className="media-content">
+                        <p className="subtitle is-6" style={{ overflow: 'auto', maxHeight: '100px' }}>Descripción: {item.description}</p>
                       </div>
               </div>
 
-              <div class="media">
-                      <div class="media-content">
-                        <p class="subtitle is-6 has-text-info">Creado: {item.created_at}</p>
+              <div className="media">
+                      <div className="media-content">
+                        <p className="subtitle is-6 has-text-info">Creado: {item.created_at}</p>
                       </div>
               </div>
 
-              <div class="media">
-                      <div class="media-content">
-                        <p class="subtitle is-6 has-text-info">Actualizado: {item.updated_at}</p>
+              <div className="media">
+                      <div className="media-content">
+                        <p className="subtitle is-6 has-text-info">Actualizado: {item.updated_at}</p>
                       </div>
               </div>
         </div>
