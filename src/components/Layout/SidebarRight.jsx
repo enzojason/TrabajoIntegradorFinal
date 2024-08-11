@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import IsAuth from './IsAuth';
 const SidebarRight = () => {
+  //componente de la barra lateral derecha, muestra las rutas de perfil y autenticacion
     return (
         <aside>
           <nav>

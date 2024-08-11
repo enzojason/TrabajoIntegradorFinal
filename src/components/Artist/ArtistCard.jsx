@@ -8,15 +8,18 @@ import ArtistForm from './ArtistForm';
 import { deleteComponent } from '../../services/api';
 
 const ArtistCard = ({item:artist}) => {  
+  //componente card de cada artista, se muestra los datos del artista y se puede editar o eliminar
   const { albumData, isLoading, isError } = useContext(DataContext);
   const { profileData } = useContext(DataContext);
   const [isCreating, setIsCreating] = useState(false);
 
   const handleSave = () => {
+    //manejador de guardar artista
     setIsCreating(false);
   }
 
   const handleDelete = async (id) => {
+    //manejador de eliminar artista y las elimina en un fetch
     try{
       setIsCreating(true);  
       await deleteComponent('artists', id);  
@@ -37,6 +40,7 @@ const ArtistCard = ({item:artist}) => {
 }
 
 const handleEdit = (artist) => {
+  //manejador de editar artista
     setIsCreating(true);  
     console.log('EDITAR', artist);
     

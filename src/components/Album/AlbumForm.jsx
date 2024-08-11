@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { createComponent } from '../../services/api';
 
 const AlbumForm = ({ album = {}, onSave }) => {
+  // Formulario para crear o editar un album
   const [title, setTitle] = useState(album.title || '');
   const [year, setYear] = useState(album.year || '');
   const [artist, setArtist] = useState(album.artist || '');
@@ -9,10 +10,12 @@ const AlbumForm = ({ album = {}, onSave }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleImageChange = (e) => {
+    // Manejador de cambio de imagen
     setCover(e.target.files[0]);
   }
 
   const handleSubmit = async (e) => {
+    // Manejador de envio de formulario
     e.preventDefault();
 
     const formData = new FormData();

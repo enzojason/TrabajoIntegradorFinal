@@ -1,11 +1,17 @@
 import { Link } from 'react-router-dom';
+
 const SidebarLeft = () => {
+  //componente de la barra lateral izquierda, muestra las rutas de la aplicacion
+
+
   return (
     <aside>
       <nav>
         <ul>
           <li><Link to="/">Home Izquierdo</Link></li>
-          <li><Link to="/search">Buscar</Link></li> 
+
+          <li><Link to="/buscar">Buscar Canciones</Link></li>
+            
           <li><Link to="/songs">Canciones</Link></li>
           <li><Link to="/albums">Albunes</Link></li>
           <li><Link to ="/artists">Artistas</Link></li>

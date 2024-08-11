@@ -13,11 +13,11 @@ const PlaylistPage = () => {
         setIsCreating(true);
         setForm("playlist");
     };
-    const handleCreateEntrie = () => {
-        //manejador de crear entrada
-        setIsCreating(true);
-        setForm("entrie");
-    }
+        const handleCreateEntrie = () => {
+            //manejador de crear entrada
+            setIsCreating(true);
+            setForm("entrie");
+        }
 
     const handleSave = () => {
         //manejador de guardar playlist

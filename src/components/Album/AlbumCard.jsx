@@ -8,16 +8,19 @@ import { deleteComponent ,updateComponent} from '../../services/api';
 import AlbumForm from './AlbumForm';
 
 const AlbumCard = ({item:album }) => {  
+  //componente card de cada album, se muestra los datos del album y se puede editar o eliminar
   const { artistData, isLoading, isError } = useContext(DataContext);
 
   const [isCreating, setIsCreating] = useState(false);
   
   
   const handleSave = () => {
+    //manejador de guardar album
     setIsCreating(false);
   };
 
   const handleDelete = async (id) => {
+    //manejador de eliminar album y las elimina en un fetch
     try{
       await deleteComponent('albums', id);  
       console.log("delete album: ",id);
@@ -36,6 +39,7 @@ const AlbumCard = ({item:album }) => {
 }
 
 const handleEdit = (album) => {
+  //manejador de editar album
     setIsCreating(true);  
     console.log('EDITAR', album);
     

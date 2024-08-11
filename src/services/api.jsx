@@ -12,28 +12,7 @@ export const loginUser = async (username, password) => {
   return data;
 };
 
-
-
-
-export const fetchSongs = async () => {
-  const response = await fetch(`${API_URL}/songs/`,{
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
-  });
-  const data = await response.json();
-  if (!response.ok) throw new Error(data.message);
-  if(response.ok) console.log("CORRECTO");
-  return data;
-};
-
-export const fetchSongDetail = async (id) => {
-  const response = await fetch(`${API_URL}/songs/${id}`);
-  const data = await response.json();
-  if (!response.ok) throw new Error(data.message);
-  return data;
-};
-
-// Para usarla en songForm 
+// Crear un nuevo componente, a partir de Data(objeto) y la ruta de la API 
 export const createComponent = async (Data,ruta) => {
   const token = localStorage.getItem("authToken");
   const response = await fetch(`${API_URL}/${ruta}/`, {
@@ -49,6 +28,7 @@ export const createComponent = async (Data,ruta) => {
   return data;
 };
 
+// Actualizar un componente, a partir de datos, ruta y id
 export const updateComponent = async (datos,ruta,id) => {
   const token = localStorage.getItem("authToken");
   const response = await fetch(`${API_URL}/${ruta}/${id}`, {
@@ -63,6 +43,7 @@ export const updateComponent = async (datos,ruta,id) => {
   return data;
 };
 
+// Eliminar un componente, a partir de la ruta y el id
 export const deleteComponent = async (ruta,id) => {
   console.log("id song delete ",id);
   const token = localStorage.getItem("authToken");
@@ -76,7 +57,7 @@ export const deleteComponent = async (ruta,id) => {
   return response;
 };
 
-
+// Obtener todos los componentes de una ruta, sin paginación
 export const fetchAll = async (ruta) => {
   const token = localStorage.getItem("authToken");
 
@@ -101,7 +82,7 @@ export const fetchAll = async (ruta) => {
   }
 };
 
-
+//Conseguir el perfil del usuario
 export const getProfile = async () => {
   const token = localStorage.getItem("authToken");
 
@@ -126,4 +107,48 @@ export const getProfile = async () => {
       console.error('Error in getProfile:', error);
       throw error;
   }
+};
+
+// Trae Todas las canciones
+export const fetchSongs = async () => {
+  const response = await fetch(`${API_URL}/songs/?page_size=100`,{
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  });
+  const data = await response.json();
+  if (!response.ok) throw new Error(data.message);
+  return data;
+};
+
+
+
+// Para Generos (Crear,Leer, Modificar, Eliminar)
+export const fetchGenres = async () => {
+  const response = await fetch(`${API_URL}/genres/?page_size=20`,{
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  });
+  const data = await response.json();
+  if (!response.ok) throw new Error(data.message);
+  return data;
+};
+
+
+// Para Artistas (Leer)
+export const fetchArtists  = async () => {
+  const response = await fetch(`${API_URL}/artists/?page_size=20`,{
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  });
+  const data = await response.json();
+  if (!response.ok) throw new Error(data.message);
+  return data;
+};
+
+// Trae la cancion correspondiente a un ID especifico.
+export const fetchSongDetail = async (id) => {
+  const response = await fetch(`${API_URL}/songs/${id}`);
+  const data = await response.json();
+  if (!response.ok) throw new Error(data.message);
+  return data;
 };

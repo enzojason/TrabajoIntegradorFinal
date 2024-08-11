@@ -3,12 +3,13 @@
 import React, { useEffect, useState } from 'react';
 import { createComponent } from '../../services/api';
 
-const EntrieForm = ({ entrie = {}, onSave }) => {
+const EntrieForm = ({id_playlist, onSave} ) => {
   //Formulario de creacion de entradas de playlist
 
-  const [order, setOrder] = useState(entrie.order || '');
-  const [playlist, setPlaylist] = useState(entrie.playlist || '');
-  const [song,setSong] = useState(entrie.song || '');
+  const [order, setOrder] = useState('');
+  const [playlist, setPlaylist] = useState(id_playlist ? id_playlist : '');
+  const [song,setSong] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
 
   const handleSubmit = async (e) => {
@@ -22,13 +23,17 @@ const EntrieForm = ({ entrie = {}, onSave }) => {
 
     console.log("FORM DATA ",formData);
     try {
+      setIsLoading(true); 
       const data = await createComponent(formData,"playlist-entries"); // Enviamos FormData para crear 
       console.log("DATA ",data);
       onSave();
       console.log("guardado");
-      alert('Song saved successfully');
+      alert('Entry saved successfully');
     } catch (error) {
-      alert('Error saving song: ' + error.message);
+      alert('Error saving entry: ' + error.message);
+    }
+    finally{
+      setIsLoading(false);
     }
   };
 
@@ -36,19 +41,22 @@ const EntrieForm = ({ entrie = {}, onSave }) => {
     <form onSubmit={handleSubmit}>
       <div>
         <label>Orden: </label>
-        <input type="number" value={order} onChange={(e) => setOrder(e.target.value)} required />
+        <input type="number" value={order} onChange={(e) => setOrder(e.target.value)}  required/>
       </div>
       <div>
         <label>Playlist: </label>
-        <input type="number" value={playlist} onChange={(e) => setPlaylist(e.target.value)} required />
+        <input type="number" value={playlist} onChange={(e) => setPlaylist(e.target.value)}  />
       </div>
       <div>
         <label >Canción: </label>
-        <input type="number" value={song} onChange={(e)=> setSong(e.target.value)}required />
+        <input type="number" value={song} onChange={(e)=> setSong(e.target.value)} />
       </div>
       
-      <button type="submit">Guardar</button>
-      <button onClick={()=>{onSave();}}>Salir</button>
+      {isLoading ? <h1>Cargando...</h1>
+      : 
+      (<div>
+        <button type="submit">Guardar</button>
+      </div> )}
 
     </form>
   );

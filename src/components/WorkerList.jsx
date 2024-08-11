@@ -3,7 +3,8 @@ import useFetch from "../hooks/useFetch";
 import { useEffect, useState } from "react";
 
 //TRABAJA Y AÑADE LA LISTA
-// Recibe la ruta, nombre (cualquier nombre) , ItemComponent (componente que se va a renderizar)
+// Recibe la ruta, nombre (cualquier nombre) , ItemComponent (componente que se va a renderizar) 
+//Y renderiza una lista completa con los datos de la API
 function ListaElemento({ruta,nombre,ItemComponent}) {
     const [{ data, isError, isLoading }, doFetch] = useFetch(
         `https://sandbox.academiadevelopers.com/harmonyhub/${ruta}`,

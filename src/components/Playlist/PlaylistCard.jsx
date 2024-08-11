@@ -6,13 +6,15 @@ import { DataContext } from '../../contexts/DataContext';
 import { useContext } from 'react';
 import { deleteComponent } from '../../services/api';
 import PlaylistForm from './PlaylistForm';
+import SongCard from '../Song/SongCard';
+import EntrieForm from './EntrieForm';
 
 const PlaylistCard = ({item:playlist }) => {
   //componente card de cada playlist, se muestra los datos de la playlist y se puede editar o eliminar 
   const [showEntries, setIsShowEntries] = useState(false);
   const { profileData } = useContext(DataContext);
   const [isCreating, setIsCreating] = useState(false);
-
+  const [isEditingEntry, setIsEditingEntry] = useState(false);
   const { entriesData, isLoading, isError } = useContext(DataContext);
   const {songData} = useContext(DataContext);
 
@@ -46,16 +48,42 @@ const PlaylistCard = ({item:playlist }) => {
     
 }
 
+const handleCreateEntrie = (e) => {
+  //manejador de crear entrada
+  e.preventDefault();
+  setIsEditingEntry(!isEditingEntry);
+
+}
+
 const handleEdit = (playlist) => {
   //manejador de editar playlist
     setIsCreating(true);  
     console.log('EDITAR', playlist);
     
   };
+  const handleDeleteEntry = async (id) => {
+    //manejadaor de eliminar entrada de una playlist
+    try{
+      await deleteComponent('playlist-entries', id);  
+      console.log("delete song: ",id);
+      console.log("eliminado");
+      alert('Entry deleted successfully');
+    }
+    catch(error){
+      alert('Error deleting entry: ' + error.message);
+
+    }
+    finally{
+      setIsCreating(false);
+      window.location.reload(); //Rescarga la pagina
+    }
+    
+}
 
   if (isLoading) return <p>Cargando...</p>;
   if (isError) return <p>Error al cargar los datos</p>;
   
+
   return (
     
     <div>
@@ -70,6 +98,10 @@ const handleEdit = (playlist) => {
                         {playlist.public==="true" ? <i>Playlist Pública <small>ID: {playlist.id}</small></i> : <i>Playlist Privada <small>ID: {playlist.id}</small></i>}
                         <p >Descripcion: {playlist.description}</p>
                         <p >Ultima Actualización: {new Date(playlist.updated_at).toLocaleDateString()}</p>
+                        <button onClick={handleCreateEntrie}> Agregar entrada </button>
+                        {isEditingEntry && <EntrieForm onSave={handleSave}  id_playlist={playlist.id}/>}
+
+                        <br />
                         <button onClick={handleShowEntries}>{playlist.entries.length === 1 ? <u>{playlist.entries.length} Canción</u> : <u>{playlist.entries.length} Canciónes</u> }
                         </button>  
                       
@@ -95,7 +127,15 @@ const handleEdit = (playlist) => {
                             {songData.map(song => (
                             song.id === entry.song &&(
                         <div key={song.id} className='card'>
-                                <h1><strong># {song.title}</strong></h1>
+                          <div className="content">
+                            <i>#{entry.order}</i>
+                            <p>{song.title}</p>
+                            <button  onClick={() => handleDeleteEntry(entry.id)}>Eliminar entrada</button>      
+                            <audio controls>                          
+                              <source src={song.song_file} type="audio/mpeg" />
+                            </audio>
+                            
+                        </div>
                         </div>
                         ))
                         )}
@@ -113,7 +153,6 @@ const handleEdit = (playlist) => {
         </div>
         
         )}
-        
     </div>
     
   );

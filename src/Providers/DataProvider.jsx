@@ -5,6 +5,7 @@ import { fetchAll } from "../services/api";
 import { getProfile } from "../services/api";
 
 const DataProvider = ({ children }) => {
+  //Provider de datos, se encarga de obtener los datos de la api y pasarlos a los componentes
     const [profileData,setProfileData] = useState([]);
     const [songData, setSongData] = useState([]);
     const [artistData, setArtistData] = useState([]);

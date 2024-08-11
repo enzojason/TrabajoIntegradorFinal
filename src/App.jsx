@@ -21,6 +21,9 @@ import PrivateRoute from './components/PrivateRoute';
 import NotFoundPage from './pages/NotFoundPage';
 import DataProvider from './Providers/DataProvider';
 
+
+import Buscar from './components/Song/Buscar';
+
 const App = () => (
   <Router>
     <AuthProvider>
@@ -41,6 +44,9 @@ const App = () => (
           <Route path="/playlists" element={<PlaylistPage />} />
           <Route path="/genres" element={<GenresPage />} />
           <Route path='/info' element={<InfoPage/>}/>
+
+          <Route path="/buscar" element={<Buscar />} />
+
 
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

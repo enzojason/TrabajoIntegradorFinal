@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { createComponent, updateComponent } from '../../services/api';
 
 const ArtistForm = ({ artist = {}, onSave }) => {
+  // Formulario para crear o editar un artista
   const [name, setName] = useState(artist.name || '');
   const [bio,setBio] = useState(artist.bio || '');
   const [website, setWebsite] = useState(artist.website || '');
@@ -11,10 +12,12 @@ const ArtistForm = ({ artist = {}, onSave }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleImageChange = (e) => {
+    // Manejador de cambio de imagen
     setImage(e.target.files[0]);
   }
 
   const handleSubmit = async (e) => {
+    // Manejador de envio de formulario
     e.preventDefault();
 
     const formData = new FormData();
@@ -68,12 +71,12 @@ const ArtistForm = ({ artist = {}, onSave }) => {
         <label>Imagen (.png .jpeg)</label>
         <input type="file" accept=".png, .jpeg, .jpg" onChange={handleImageChange}/>
       </div>
-      {isLoading ? <h1>Cargando...</h1>
-      : 
-      (<div>
-        <button type="submit">Guardar</button>
-        <button onClick={()=>{onSave();}}>Salir</button>
-      </div> )}
+        {isLoading ? <h1>Cargando...</h1>
+        : 
+        (<div>
+          <button type="submit">Guardar</button>
+          <button onClick={()=>{onSave();}}>Salir</button>
+        </div> )}
     </form>
   );
 };

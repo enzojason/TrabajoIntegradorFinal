@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { DataContext } from '../../contexts/DataContext';
@@ -7,6 +8,7 @@ import { useState } from 'react';
 import { deleteComponent } from '../../services/api'; 
 
 const SongCard = ({ item:song }) => {
+  //componente card de cada cancion, se muestra los datos de la cancion y se puede editar o eliminar
   const { profileData, isLoading, isError } = useContext(DataContext);
   const {albumData} = useContext(DataContext);
   const {artistData} = useContext(DataContext);
@@ -14,10 +16,12 @@ const SongCard = ({ item:song }) => {
   const [isCreating, setIsCreating] = useState(false);
   
   const handleSave = () => {
+    //manejador de guardar cancion
     setIsCreating(false);
   };
 
 const handleDelete = async (id) => {
+  //manejador de eliminar cancion y las elimina en un fetch
     try{
       await deleteComponent('songs', id);  
       console.log("delete song: ",id);
@@ -38,6 +42,7 @@ const handleDelete = async (id) => {
   
 
 const handleEdit = (song) => {
+  //manejador de editar cancion
     setIsCreating(true);  
     console.log('EDITAR', song);
     
