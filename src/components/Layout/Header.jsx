@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from "../../contexts/AuthContext";
 import drstrange from '../../assets/drstrange.png';
 import musica from '../../assets/musica.png'
-
+import { DataContext } from '../../contexts/DataContext';
 
 
 //const isAuthenticated = localStorage.getItem("authToken") !== null;
@@ -17,6 +17,8 @@ const Header = () => {
   const { logout } = useAuth("actions");
   const { isAuthenticated } = useAuth("state");
   //const {actions} = useContext(AuthContext);
+  const { profileData } = useContext(DataContext);
+
 
   return (
     <header className="navbar is-dark">
@@ -32,6 +34,8 @@ const Header = () => {
                           <>
                             
                             <div className="navbar-end">
+                              
+                              <p className='subtitle is-size-6'>{profileData.email}</p>
                               <Link to="/profile" className="navbar-item">
 
                                 <figure className="image is-35x35">
