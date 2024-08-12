@@ -21,7 +21,7 @@ const SongsPage = () => {
   return (
     <div>
           <div className="hero-body">
-          <p className="title">Canciones</p>
+            <p className="title">Canciones</p>
           </div>
         <div className='buttons'>
           <button onClick={handleCreate} className='button'>Nueva cancion</button>
