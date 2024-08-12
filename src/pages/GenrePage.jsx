@@ -15,7 +15,18 @@ const GenrePage = () => {
   };
     return (
       <div>
-        <button onClick={handleCreate}>Nuevo Genero</button>
+        <div className="hero-body">
+          <div className='column .is-offset-x'></div>
+          <div className='column .is-offset-x'></div>
+
+          <p className="title has-text-centered is-size-1">Generos</p>
+        </div>
+        <div className='column .is-offset-x'></div>
+        <div className='column .is-offset-x'></div>
+
+        <button onClick={handleCreate} className='button is-white'>Nuevo Genero</button>
+        <div className='column .is-offset-x'></div>
+
         {isCreating ? (<GenreForm onSave={handleSave} />) :
          (<ListaElemento ruta="genres" nombre="Generos" ItemComponent={GenreCard} />)}
       </div>

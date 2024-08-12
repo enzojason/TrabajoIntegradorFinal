@@ -19,11 +19,11 @@ const ArtistPage = () => {
     return (
       <div>
         <div className="hero-body">
-        <div className='column .is-offset-x'></div>
-        <div className='column .is-offset-x'></div>
+          <div className='column .is-offset-x'></div>
+          <div className='column .is-offset-x'></div>
 
           <p className="title has-text-centered is-size-1">Artistas</p>
-          </div>
+        </div>
         <div className='column .is-offset-x'></div>
         <div className='column .is-offset-x'></div>
 

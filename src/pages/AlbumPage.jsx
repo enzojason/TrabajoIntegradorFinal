@@ -21,9 +21,17 @@ const AlbumPage = () => {
 
   return (
     <div>
-      <h1>Albunes </h1>
-    
-    <button onClick={handleCreate}>Nuevo Album</button>
+      <div className="hero-body">
+          <div className='column .is-offset-x'></div>
+          <div className='column .is-offset-x'></div>
+
+          <p className="title has-text-centered is-size-1">Albunes</p>
+      </div>
+      <div className='column .is-offset-x'></div>
+      <div className='column .is-offset-x'></div>
+    <button onClick={handleCreate}  className='button is-white'>Nuevo Album</button>
+    <div className='column .is-offset-x'></div>
+
     {isCreating ? (<AlbumForm onSave={handleSave} />) : (<ListaElemento ruta="albums" nombre="Albums" ItemComponent={AlbumbCard}/>)}
     
   </div>

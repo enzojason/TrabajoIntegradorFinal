@@ -46,7 +46,7 @@ const EntrieForm = ({id_playlist, onSave} ) => {
       <div className="field">
         <label class="label">Orden: </label>
         <div class="control">
-          <input class="input" type="number" value={order} onChange={(e) => setOrder(e.target.value)}  required/>
+          <input class="input" type="number" value={order} onChange={(e) => setOrder(e.target.value)} />
         </div>
       </div>
       <div className="field">
@@ -69,7 +69,7 @@ const EntrieForm = ({id_playlist, onSave} ) => {
           <button className='button is-link' type="submit">Guardar</button>
         </div>
         <div className="control">
-        <button className='button is-light' onClick={()=>{onSave();}} type="submit">Salir</button>
+        <button className='button is-light' onClick={()=>onSave()} type="button">Salir</button>
         </div>
 
         
