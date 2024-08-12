@@ -33,20 +33,22 @@ const PlaylistPage = () => {
     
     return (
         <div>
-        <button onClick={handleCreate}>Nueva Playlist</button>
-        <br />
-        <button onClick={handleCreateEntrie}>Nueva Entrada</button>
-        <br />
-        {isCreating ? (
-            currentForm === 'playlist' ? (
-            <PlaylistForm onSave={handleSave} />
-            ) : (
-            <EntrieForm onSave={handleSaveEntrie} />
-            )
-        ) : (
-            <ListaElemento ruta="playlists" nombre="Playlists" ItemComponent={PlaylistCard } />
-        )}
-    </div>
+            <div  class="field is-grouped">
+                <button className='button is-light' onClick={handleCreate}>Nueva Playlist</button>
+                <button className='button is-light' onClick={handleCreateEntrie}>Nueva Entrada</button>
+            </div>
+            <div>
+                {isCreating ? (
+                    currentForm === 'playlist' ? (
+                    <PlaylistForm onSave={handleSave} />
+                    ) : (
+                    <EntrieForm onSave={handleSaveEntrie} />
+                    )
+                ) : (
+                    <ListaElemento ruta="playlists" nombre="Playlists" ItemComponent={PlaylistCard } />
+                )}
+            </div>
+        </div>
     );
   };
   

@@ -38,27 +38,46 @@ const EntrieForm = ({id_playlist, onSave} ) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>Orden: </label>
-        <input type="number" value={order} onChange={(e) => setOrder(e.target.value)}  required/>
+    <div className="is-centered">
+    <div className='card'
+        style={{width: "600px", 
+        height: "100%",}}> 
+    <form lassName='box' onSubmit={handleSubmit}>
+      <div className="field">
+        <label class="label">Orden: </label>
+        <div class="control">
+          <input class="input" type="number" value={order} onChange={(e) => setOrder(e.target.value)}  required/>
+        </div>
       </div>
-      <div>
-        <label>Playlist: </label>
-        <input type="number" value={playlist} onChange={(e) => setPlaylist(e.target.value)}  />
+      <div className="field">
+        <label class="label">Playlist: </label>
+        <div class="control">
+          <input class="input" type="number" value={playlist} onChange={(e) => setPlaylist(e.target.value)}  />
+        </div>
       </div>
-      <div>
-        <label >Canción: </label>
-        <input type="number" value={song} onChange={(e)=> setSong(e.target.value)} />
+      <div className="field">
+        <label class="label">Canción: </label>
+        <div class="control">
+          <input class="input" type="number" value={song} onChange={(e)=> setSong(e.target.value)} />
+        </div>
       </div>
       
       {isLoading ? <h1>Cargando...</h1>
       : 
-      (<div>
-        <button type="submit">Guardar</button>
+      (<div class="field is-grouped">
+        <div className="control">
+          <button className='button is-link' type="submit">Guardar</button>
+        </div>
+        <div className="control">
+        <button className='button is-light' onClick={()=>{onSave();}} type="submit">Salir</button>
+        </div>
+
+        
       </div> )}
 
     </form>
+    </div>
+  </div>
   );
 };
 

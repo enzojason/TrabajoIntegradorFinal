@@ -89,7 +89,7 @@ const ArtistForm = ({ artist = {}, onSave }) => {
                     <button className='button is-link' type="submit">Guardar</button>
                   </div>
 
-                    <div className="control">
+                  <div className="control">
                     <button className='button is-light' onClick={()=>{onSave();}}>Salir</button>
                   </div> 
                 </div> 
