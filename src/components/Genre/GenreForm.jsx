@@ -29,18 +29,34 @@ const GenreForm = ({ genero = {}, onSave }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>Nombre: </label>
-        <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
+    <div className="is-centered">
+      <div className='card'
+        style={{width: "600px", 
+        height: "100%",}}> 
+        <form className='box' onSubmit={handleSubmit}>
+
+          <div className="field">
+            <label class="label">Nombre: </label>
+            <input class="input" type="text" value={name} onChange={(e) => setName(e.target.value)} required />
+          </div>
+
+          <div className="field">
+            <label class="label">Description: </label>
+            <input class="input" type="text" value={description} onChange={(e)=> setDescription(e.target.value)} />
+          </div>
+          <div class="field is-grouped">
+                  <div className="control">
+                    <button className='button is-link' type="submit">Guardar</button>
+                  </div>
+
+                    <div className="control">
+                    <button className='button is-light' onClick={()=>{onSave();}}>Salir</button>
+                  </div> 
+                </div> 
+
+        </form>
       </div>
-      <div>
-        <label >Description: </label>
-        <input type="text" value={description} onChange={(e)=> setDescription(e.target.value)} />
-      </div>
-      <button type="submit">Guardar</button>
-      <button onClick={()=>{onSave();}}>Salir</button>
-    </form>
+    </div>
   );
 };
 

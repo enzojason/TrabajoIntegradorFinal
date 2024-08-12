@@ -54,30 +54,49 @@ const ArtistForm = ({ artist = {}, onSave }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>Nombre: </label>
-        <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+    <div className="is-centered">
+    <div className='card'
+        style={{width: "600px", 
+        height: "100%",}}> 
+      <form className='box' onSubmit={handleSubmit}>
+            
+            <div className="field">
+              <label class="label">Nombre: </label>
+              <div class="control">
+                <input class="input" type="text" placeholder="Nombre del Artista" value={name} onChange={(e) => setName(e.target.value)}/>
+              </div>
+              
+            </div>
+            <div className="field">
+              <label class="label">Bio: </label>
+              <input class="input" type="text" placeholder="Info del Artista" value={bio} onChange={(e)=> setBio(e.target.value)} />
+            </div>
+
+            <div className="field">
+              <label class="label">Sitio Web: </label>
+              <input class="input" type="text" placeholder="www" value={website} onChange={(e) => setWebsite(e.target.value)} />
+            </div>
+
+            <div className="field">
+              <label class="label">Imagen (.png .jpeg)</label>
+              <input class="input" type="file" accept=".png, .jpeg, .jpg" onChange={handleImageChange}/>
+            </div >
+
+              {isLoading ? <h1>Cargando...</h1>
+              : 
+              (<div class="field is-grouped">
+                  <div className="control">
+                    <button className='button is-link' type="submit">Guardar</button>
+                  </div>
+
+                    <div className="control">
+                    <button className='button is-light' onClick={()=>{onSave();}}>Salir</button>
+                  </div> 
+                </div> 
+                )}
+          </form>
       </div>
-      <div>
-        <label >Bio: </label>
-        <input type="text" value={bio} onChange={(e)=> setBio(e.target.value)} />
       </div>
-      <div>
-        <label>Sitio Web: </label>
-        <input type="text" value={website} onChange={(e) => setWebsite(e.target.value)} />
-      </div>
-      <div>
-        <label>Imagen (.png .jpeg)</label>
-        <input type="file" accept=".png, .jpeg, .jpg" onChange={handleImageChange}/>
-      </div>
-        {isLoading ? <h1>Cargando...</h1>
-        : 
-        (<div>
-          <button type="submit">Guardar</button>
-          <button onClick={()=>{onSave();}}>Salir</button>
-        </div> )}
-    </form>
   );
 };
 
