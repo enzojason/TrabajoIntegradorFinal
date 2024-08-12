@@ -43,22 +43,38 @@ const PlaylistForm = ({ playlist = {}, onSave }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>Nombre: </label>
-        <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
+    <div className="is-centered">
+    <div className='card'
+        style={{width: "600px", 
+        height: "100%",}}> 
+    <form className='box' onSubmit={handleSubmit}>
+      <div className="field">
+        <label class="label">Nombre: </label>
+        <div class="control">
+          <input class="input" type="text" value={name} onChange={(e) => setName(e.target.value)} required />
+        </div>
       </div>
-      <div>
-        <label >Descripción: </label>
-        <input type="text" value={description} onChange={(e)=> setDescription(e.target.value)} />
+      <div className="field">
+        <label class="label">Descripción: </label>
+        <div class="control">
+          <input class="input" type="text" value={description} onChange={(e)=> setDescription(e.target.value)} />
+        </div>
       </div>
       {isLoading ? <h1>Cargando...</h1>
       : 
-      (<div>
-        <button type="submit">Guardar</button>
-        <button onClick={()=>{onSave();}}>Salir</button>
-      </div> )}    
+      ( <div class="field is-grouped">
+        <div className="control">
+          <button className='button is-link' type="submit">Guardar</button>
+        </div>
+
+          <div className="control">
+          <button className='button is-light' onClick={()=>{onSave();}}>Salir</button>
+        </div> 
+      </div> 
+    )}    
       </form>
+      </div>
+      </div>
   );
 };
 

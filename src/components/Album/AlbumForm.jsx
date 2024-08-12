@@ -47,31 +47,53 @@ const AlbumForm = ({ album = {}, onSave }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>Título: </label>
-        <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} required />
+    <div className="is-centered">
+    <div className='card'
+        style={{width: "600px", 
+        height: "100%",}}> 
+    <form className='box' onSubmit={handleSubmit}>
+
+      <div className="field">
+        <label class="label">Título: </label>
+        <div class="control">
+          <input class="input" type="text" value={title} onChange={(e) => setTitle(e.target.value)} required />
+        </div>
       </div>
-      <div>
-        <label>Año: </label>
-        <input type="number" value={year} onChange={(e) => setYear(e.target.value)} required />
+
+      <div className="field">
+        <label class="label">Año: </label>
+        <div class="control">
+          <input class="input" type="number" value={year} onChange={(e) => setYear(e.target.value)} required />
+        </div>
       </div>
-      <div>
-        <label>Artista: </label>
-        <input type="number" value={artist} onChange={(e) => setArtist(e.target.value)} />
+
+      <div className="field">
+        <label class="label">Artista: </label>
+        <div class="control">
+         <input class="input" type="number" value={artist} onChange={(e) => setArtist(e.target.value)} />
+        </div>
       </div>
-      <div>
-        <label>Imagen (.png .jpeg)</label>
-        <input type="file" accept=".png, .jpeg, .jpg" onChange={handleImageChange}/>
+
+      <div className="field">
+        <label class="label">Imagen (.png .jpeg)</label>
+        <div class="control">
+          <input class="input" type="file" accept=".png, .jpeg, .jpg" onChange={handleImageChange}/>
+        </div>
 
       </div>
       {isLoading ? <h1>Cargando...</h1>
       : 
-      (<div>
-        <button type="submit">Guardar</button>
-        <button onClick={()=>{onSave();}}>Salir</button>
+      (<div class="field is-grouped">
+        <div className="control">
+          <button className='button is-link' type="submit">Guardar</button>
+        </div> 
+        <div className="control">
+          <button className='button is-ligth' onClick={()=>{onSave();}}>Salir</button>
+        </div> 
       </div> )}
     </form>
+    </div>
+    </div>
   );
 };
 
