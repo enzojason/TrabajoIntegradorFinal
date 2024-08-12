@@ -24,9 +24,8 @@ const DataProvider = ({ children }) => {
           if (localStorage.getItem("authToken")){
             const dataprofile = await getProfile();
             setProfileData(dataprofile);
-          }
-        
 
+            
           const datasong = await fetchAll('songs');
           setSongData(datasong.results);
           
@@ -41,6 +40,9 @@ const DataProvider = ({ children }) => {
           setEntriesData(dataentries.results);
           
 
+          }
+        
+          
           
 
 
