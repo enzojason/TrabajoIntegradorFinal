@@ -41,6 +41,7 @@ const SongForm = ({ song = {}, onSave }) => {
     style={{width: "700px",
       height: "100%",}}>
       <form onSubmit={handleSubmit}>
+        
           <div className="card-content">
                 <label className="label">Iagen de Portada:</label>
                 <input class="input is-focused"

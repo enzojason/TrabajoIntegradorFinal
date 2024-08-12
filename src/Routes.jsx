@@ -11,6 +11,7 @@ import AlbumPage from './pages/AlbumPage';
 import ArtistPage from './pages/ArtistPage';
 import PlaylistPage from './pages/PlaylistPage';
 import GenrePage from './pages/GenrePage';
+import NotFoundPage from './pages/NotFoundPage';
 
 
 const AppRoutes = () => (
@@ -25,6 +26,7 @@ const AppRoutes = () => (
       <Route path="/artists" element={<ArtistPage />} />
       <Route path="/playlists" element={<PlaylistPage />} />
       <Route path="/genres" element={<GenrePage />} />
+      <Route path="*" element={<NotFoundPage />} />
     </Route>
   </Routes>
 );

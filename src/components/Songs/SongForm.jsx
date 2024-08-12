@@ -64,35 +64,60 @@ const SongForm = ({ song = {}, onSave }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>Título</label>
-        <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} required />
-      </div>
-      <div>
-        <label>Año</label>
-        <input type="number" value={year} onChange={(e) => setYear(e.target.value)} required />
-      </div>
-      <div>
-        <label>Álbum</label>
-        <input type="number" value={album} onChange={(e) => setAlbum(e.target.value)} />
-      </div>
-      <div>
-        <label>Canción (archivo .mp3)</label>
-        <input type="file" accept=".mp3" onChange={handleFileChange} />
-      </div>
-      <div>
-        <label>Imagen (.png .jpeg)</label>
-        <input type="file" accept=".png, .jpeg, .jpg" onChange={handleImageChange}/>
-      </div>
-      {isLoading ? <h1>Cargando...</h1>
-      : 
-      (<div>
-        <button type="submit">Guardar</button>
-        <button onClick={()=>{onSave();}}>Salir</button>
-      </div> )}
-      
-    </form>
+    <div className="card"
+          style={{width: "700px",
+                  height: "100%",}}>
+
+          <form className='box'onSubmit={handleSubmit}>
+
+            <div className="field">
+              <label className='label'>Título</label>
+              <div class="control">
+                  <input class="input is-focused" type="text" value={title} onChange={(e) => setTitle(e.target.value)} required />
+              </div>
+            </div>
+
+            <div className="field">
+              <label className='label'>Año</label>
+                <div class="control">
+                  <input class="input is-focused" type="number" value={year} onChange={(e) => setYear(e.target.value)} required />
+                </div>
+            </div>
+
+            <div className="field">
+              <label className='label'>Álbum</label>
+              <div class="control">
+                  <input class="input is-focused" type="number" value={album} onChange={(e) => setAlbum(e.target.value)} />
+              </div>
+            </div>
+
+            <div className="field">
+              <label className='label'>Canción (archivo .mp3)</label>
+              <div class="control">
+                <input class="input is-focused" type="file" accept=".mp3" onChange={handleFileChange} />
+              </div>
+            </div>
+
+            <div className="field">
+              <label className='label'>Imagen (.png .jpeg)</label>
+              <div class="control">
+                <input class="input is-focused" type="file" accept=".png, .jpeg, .jpg" onChange={handleImageChange}/>
+              </div>
+            </div>
+            {isLoading ? <h1>Cargando...</h1>
+            : 
+            (<div className="field is-grouped">
+              <div className="control">
+                <button className='button is-link' type="submit">Guardar</button>
+              </div> 
+              <div className="control">
+                <button className='button is-ligth' onClick={()=>{onSave();}}>Salir</button>
+              </div> 
+            </div> )}
+            
+          </form>
+    </div>
+    
   );
 };
 
