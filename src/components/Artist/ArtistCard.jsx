@@ -60,6 +60,7 @@ const handleEdit = (artist) => {
            <img src={artist.image} style={{ maxWidth: '120px', maxHeight: '120px' }} alt="" />
          </figure>
        </div>
+       
        <div className="media-content">
          <h1 className="title is-4">Artista: <strong>{artist.name}</strong></h1>
           {artist.bio && <p className="subtitle is-6">Bio: {artist.bio}</p> }

@@ -21,8 +21,11 @@ const DataProvider = ({ children }) => {
           setIsLoading(true);
           setIsError(false);
 
-          const dataprofile = await getProfile();
-          setProfileData(dataprofile);
+          if (localStorage.getItem("authToken")){
+            const dataprofile = await getProfile();
+            setProfileData(dataprofile);
+          }
+        
 
           const datasong = await fetchAll('songs');
           setSongData(datasong.results);
@@ -33,6 +36,7 @@ const DataProvider = ({ children }) => {
           const dataart = await fetchAll('artists');
           setArtistData(dataart.results);
           
+
           const dataentries = await fetchAll('playlist-entries');
           setEntriesData(dataentries.results);
           

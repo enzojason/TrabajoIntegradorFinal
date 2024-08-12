@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { fetchSongs, fetchGenres, fetchArtists } from '../../services/api';
-import SongCard from './SongCard';
+import songCard from '../Songs/SongCard';
 
 const SongSearch = () => {
   const [songs, setSongs] = useState([]);
