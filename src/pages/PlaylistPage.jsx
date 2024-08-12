@@ -33,9 +33,17 @@ const PlaylistPage = () => {
     
     return (
         <div>
+            <div className="hero-body">
+          <div className='column .is-offset-x'></div>
+          <div className='column .is-offset-x'></div>
+
+          <p className="title has-text-centered is-size-1">Playlists</p>
+        </div>
+            <div className='column .is-offset-x'></div>
+        <div className='column .is-offset-x'></div>
             <div  class="field is-grouped">
-                <button className='button is-light' onClick={handleCreate}>Nueva Playlist</button>
-                <button className='button is-light' onClick={handleCreateEntrie}>Nueva Entrada</button>
+                <button className='button is-white' onClick={handleCreate}>Nueva Playlist</button>
+                <button className='button is-white' onClick={handleCreateEntrie}>Nueva Entrada</button>
             </div>
             <div>
                 {isCreating ? (

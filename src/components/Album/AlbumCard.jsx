@@ -10,6 +10,7 @@ import AlbumForm from './AlbumForm';
 const AlbumCard = ({item:album }) => {  
   //componente card de cada album, se muestra los datos del album y se puede editar o eliminar
   const { artistData, isLoading, isError } = useContext(DataContext);
+  const { profileData } = useContext(DataContext);
 
   const [isCreating, setIsCreating] = useState(false);
   
@@ -54,8 +55,13 @@ const handleEdit = (album) => {
         <div className="card">
         <div className="card-content">
           <div className="media">
-            <div className="">
-                <img src={album.cover} alt="" style={{width:'70px',height:'70px'}} />
+            <div className='media-left'>
+              <figure className="image is-30x30">
+              <img src={album.cover} alt="" style={{maxWidth:'120px',maxHeight:'120px'}} />
+              </figure>
+
+            </div>
+            <div className="media-content">
                 <p>Albúm: <strong>{album.title}</strong></p>
               {artistData.map(artist => (
                 artist.id === album.artist && (
@@ -66,12 +72,15 @@ const handleEdit = (album) => {
                 </div>
                 )
               ))}
-             </div>
-             </div>
-              <div className="buttons">
-                <button className="button is-warning" onClick={() => handleEdit(album)}>Editar</button>
-                <button className="button is-danger" onClick={() => handleDelete(album.id)}>Eliminar</button>
               </div>
+
+             </div>
+              {profileData.user__id === album.owner && (
+       <div className="buttons">
+         <button className="button is-warning" onClick={() => handleEdit(album)}>Editar</button>
+         <button className="button is-danger" onClick={() => handleDelete(album.id)}>Eliminar</button>
+       </div>
+     )}
               
 
               </div>

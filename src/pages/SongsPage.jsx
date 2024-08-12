@@ -21,10 +21,14 @@ const SongsPage = () => {
   return (
     <div>
           <div className="hero-body">
-            <p className="title">Canciones</p>
+          <div className='column .is-offset-x'></div>
+          <div className='column .is-offset-x'></div>
+            <p className="title has-text-centered is-size-1">Canciones</p>
           </div>
+          <div className='column .is-offset-x'></div>
+        <div className='column .is-offset-x'></div>
         <div className='buttons'>
-          <button onClick={handleCreate} className='button'>Nueva cancion</button>
+          <button onClick={handleCreate} className='button is-white'>Nueva cancion</button>
         </div>
       
       {isCreating ? (<SongForm onSave={handleSave} />) : (<ListaElemento ruta="songs" nombre="Songs" ItemComponent={SongCard} />)}

@@ -64,7 +64,7 @@ const handleEdit = (playlist) => {
     //manejadaor de eliminar entrada de una playlisty
     try{
       await deleteComponent('playlist-entries', id);  
-      console.log("delete song: ",id);
+      console.log("delete entry: ",id);
       console.log("eliminado");
       alert('Entry deleted successfully');
     }
@@ -94,11 +94,11 @@ const handleEdit = (playlist) => {
               <div className=''>  
                 {playlist.entries.length > 0 ? 
                   <div>
-                        <p ><strong>{playlist.name}</strong></p> 
-                        {playlist.public==="true" ? <i>Playlist Pública <small>ID: {playlist.id}</small></i> : <i>Playlist Privada <small>ID: {playlist.id}</small></i>}
-                        <p >Descripcion: {playlist.description}</p>
-                        <p >Ultima Actualización: {new Date(playlist.updated_at).toLocaleDateString()}</p>
-                        <button onClick={handleCreateEntrie}> Agregar entrada </button>
+                        <p className="title is-4"><strong>{playlist.name}</strong></p> 
+                        {playlist.public==="true" ? <i  className="subtitle is-6">Playlist Pública <small>ID: {playlist.id}</small></i> : <i  className="subtitle is-6">Playlist Privada <small>ID: {playlist.id}</small></i>}
+                        <p className="subtitle is-4" > {playlist.description}</p>
+                        <p className="subtitle is-6" >Ultima Actualización: {new Date(playlist.updated_at).toLocaleDateString()}</p>
+                        
                         {isEditingEntry && <EntrieForm onSave={handleSave}  id_playlist={playlist.id}/>}
 
                         <br />
@@ -108,10 +108,9 @@ const handleEdit = (playlist) => {
                 </div>
                 :
                 <div>
-                  <p ><strong>{playlist.name}</strong></p>
-                  <p >{playlist.description}</p>
-                  <p >Creado en: {playlist.created_at}</p>
-                  <p >Ultima Actualización: {new Date(playlist.updated_at).toLocaleDateString()}</p>
+                  <p className="title is-4" ><strong>{playlist.name}</strong></p>
+                  <p className="subtitle is-4">{playlist.description}</p>
+                  <p className="subtitle is-6">Ultima Actualización: {new Date(playlist.updated_at).toLocaleDateString()}</p>
                   <p >Sin canciones</p>  
                 </div>}
                 
@@ -130,7 +129,9 @@ const handleEdit = (playlist) => {
                           <div className="content">
                             <i>#{entry.order}</i>
                             <p>{song.title}</p>
-                            <button  onClick={() => handleDeleteEntry(entry.id)}>Eliminar entrada</button>      
+                            {profileData.user__id===playlist.owner && 
+                            <button  onClick={() => handleDeleteEntry(entry.id)} className='button is-ghost'>-</button>}
+                            
                             <audio controls>                          
                               <source src={song.song_file} type="audio/mpeg" />
                             </audio>
@@ -144,12 +145,16 @@ const handleEdit = (playlist) => {
                 ))}
 
                 </div>}
+
                 {profileData.user__id===playlist.owner && 
-                  <div className="buttons">
+                  <div className="buttons ">
+                    <button className="button is-success" onClick={handleCreateEntrie} > Agregar entrada </button>
                     <button className="button is-warning" onClick={() => handleEdit(playlist)}>Editar Playlist</button>
                     <button className="button is-danger" onClick={() => handleDelete(playlist.id)}>Eliminar Playlist</button>
+
                   </div>
                   }
+                  <br />
         </div>
         
         )}

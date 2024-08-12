@@ -60,8 +60,13 @@ if (isError) return <p>Error al cargar las canciones.</p>;
     <div className="card">
       <div className="card-content">
         <div className="media">
-          <div className="">
-            <p className="title is-4">{song.title}</p>
+          <div className="media-left">
+            <figure className="image is-30x30">
+            <img src={song.cover} style={{ maxWidth: '120px', maxHeight: '120px' }} alt="" />
+            </figure>
+          </div>
+          <div className='media-content'>
+          <p className="title is-4">{song.title}</p>
             { song.year && <p className='subtitle is-6'>Año: {song.year}</p>}
             {song.view_count ? <p className="subtitle is-6">{song.view_count} reproducciones</p> : <p>Sin reproducciones</p>}
             {albumData.map(album =>(
@@ -78,10 +83,11 @@ if (isError) return <p>Error al cargar las canciones.</p>;
                     </div>
                   )
                 )}
-
-            <img src={song.cover} alt="" style={{width:'80px',height:'80px'}} />
-            
           </div>
+            
+
+            
+          
         </div>
         <div className="content">
           <audio controls>
