@@ -121,7 +121,7 @@ export const deleteSong = async (id) => {
 // Para Generos (Crear,Leer, Modificar, Eliminar)
 
 export const fetchGenres = async () => {
-  const response = await fetch(`${API_URL}/genres/?page_size=20`,{
+  const response = await fetch(`${API_URL}/genres/?page_size=200`,{
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
   });
@@ -132,7 +132,7 @@ export const fetchGenres = async () => {
 
 
 export const fetchArtists  = async () => {
-  const response = await fetch(`${API_URL}/artists/?page_size=20`,{
+  const response = await fetch(`${API_URL}/artists/?page_size=200`,{
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
   });
@@ -192,7 +192,7 @@ export const fetchAll = async (ruta) => {
   const token = localStorage.getItem("authToken");
 
   try {
-    const response = await fetch(`${API_URL}/${ruta}?page_size=1000`, {
+    const response = await fetch(`${API_URL}/${ruta}?page_size=300`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

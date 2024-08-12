@@ -3,6 +3,8 @@ import SongCard from "./SongCard";
 import SongForm from './SongForm';
 import { useEffect, useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
+//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+//import '../../../node_modules/bulma/css/bulma.min.css';
 import Buscar from "./Buscar"
 
 function SongList({tipo}) {
@@ -11,7 +13,7 @@ function SongList({tipo}) {
 
     const [type, setType] = useState(tipo); // Estado para el tipo de contenido (por defecto filta por canción.)
     const [{ data, isError, isLoading }, doFetch] = useFetch(
-        `https://sandbox.academiadevelopers.com/harmonyhub/${type}s/?page_size=300`, // Cambia la URL según el tipo  (?page_size=100)
+        `https://sandbox.academiadevelopers.com/harmonyhub/${type}s/`, // Cambia la URL según el tipo  (?page_size=100)
         {}
     );
 
@@ -64,7 +66,15 @@ function SongList({tipo}) {
     return (
         <div>
             <div className="my-5">
-
+                <div className="select">
+                    <select onChange={(e) => setType(e.target.value)} value={type}>
+                        <option value="song">Canciones</option>
+                        <option value="album">Álbumes</option>
+                        <option value="artist">Artistas</option>
+                        <option value="playlist">Playlists</option>
+                        <option value="genre">Géneros</option>
+                    </select>
+                </div>
 
                 {user && (
                     <div className="field">
@@ -74,7 +84,7 @@ function SongList({tipo}) {
                             checked={filterByUser}
                             onChange={(e) => setFilterByUser(e.target.checked)}
                         />
-                        <label htmlFor="filterByUser">Filtrar por mi usuario</label>
+                        <label className='label' htmlFor="filterByUser">Filtrar por mi usuario</label>
                     </div>
                 )}
 
@@ -125,6 +135,9 @@ function SongList({tipo}) {
 export default SongList;
 
 /*
+                <span c class="icon is-small is-left">
+                    <FontAwesomeIcon icon={faUser} />
+                </span>
                 <div className="select">
                     <select onChange={(e) => setType(e.target.value)} value={type}>
                         <option value="song">Canciones</option>
