@@ -18,7 +18,18 @@ const ArtistPage = () => {
 
     return (
       <div>
-        <button onClick={handleCreate}>Nuevo Artista</button>
+        <div className="hero-body">
+        <div className='column .is-offset-x'></div>
+        <div className='column .is-offset-x'></div>
+
+          <p className="title has-text-centered is-size-1">Artistas</p>
+          </div>
+        <div className='column .is-offset-x'></div>
+        <div className='column .is-offset-x'></div>
+
+        <button onClick={handleCreate} className='button is-white'>Nuevo Artista</button>
+        <div className='column .is-offset-x'></div>
+
         {isCreating ? (<ArtistForm onSave={handleSave} />) :
          (<ListaElemento ruta="artists" nombre="Artistas" ItemComponent={ArtistCard} />)}
         

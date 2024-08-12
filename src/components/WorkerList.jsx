@@ -47,30 +47,52 @@ function ListaElemento({ruta,nombre,ItemComponent}) {
 
     return (
         <div>
-            <div>
-            {previousPage && (<button onClick={() => fetchPage(previousPage)}>Anterior</button>)}               
-            {nextPage && <button onClick={() =>  fetchPage(nextPage)}>Siguiente</button>}
-            </div>
+            <div className="is-flex is-justify-content-space-between">
+        {previousPage && (
+          <button className="button" onClick={() => fetchPage(previousPage)}>
+            Anterior
+          </button>
+        )}
+        {nextPage && (
+          <button className="button" onClick={() => fetchPage(nextPage)}>
+            Siguiente
+          </button>
+        )}
+      </div>
+      <div className='column .is-offset-x'></div>
 
-            <ul>
-                {elemento.map((item, index) => (
-                <ItemComponent key={index} item={item} />
-                ))}
-            </ul>
+      <ul>
+        {elemento.map((item, index) => (
+          <ItemComponent key={index} item={item} />
+        ))}
+      </ul>
 
-            <div>
-            {previousPage && (<button onClick={() => {
-                fetchPage(previousPage);
-                window.scrollTo({ top: 2, behavior: 'smooth' }); 
-                }}>Anterior</button>)}  
-                          
-            {nextPage && <button onClick={() => { 
-                fetchPage(nextPage);
-                window.scrollTo({ top: 2, behavior: 'smooth' });
-                }}>Siguiente</button>}
-            </div>
-            
-        </div>
+      <div className="is-flex is-justify-content-space-between">
+        {previousPage && (
+          <button
+            className="button"
+            onClick={() => {
+              fetchPage(previousPage);
+              window.scrollTo({ top: 2, behavior: 'smooth' });
+            }}
+          >
+            Anterior
+          </button>
+        )}
+        {nextPage && (
+          <button
+            className="button"
+            onClick={() => {
+              fetchPage(nextPage);
+              window.scrollTo({ top: 2, behavior: 'smooth' });
+            }}
+          >
+            Siguiente
+          </button>
+        )}
+      </div>
+
+              </div>
     );
 }
 
