@@ -108,7 +108,7 @@ const SongSearch = () => {
           <h2>Lista de Canciones</h2>
           <div className="column">
                 <div className="columns is-mobile is-2">
-                    {filteredSongs.slice(0,5).map((item) => (
+                    {filteredSongs.slice(0,10).map((item) => (
                         <div key={item.id} className="column is-one-fifth">
                             <SongCard 
                                 item={item} 
