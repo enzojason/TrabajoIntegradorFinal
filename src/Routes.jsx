@@ -6,6 +6,7 @@ import Login from './components/Auth/Login';
 import ProfilePage from './pages/ProfilePage';
 import PrivateRoute from './components/PrivateRoute';
 import Buscar from './components/Music/Buscar'
+import ItemList from './components/AllItems/ItemList'
 
 const AppRoutes = () => (
   <Routes>
@@ -16,6 +17,7 @@ const AppRoutes = () => (
       <Route path="/login" element={<Login />} />
       <Route path="/profile" element={<PrivateRoute> <ProfilePage /> </PrivateRoute>} />
       <Route path="/buscar" element={<Buscar />} />
+      <Route path="/itemList" element={<ItemList/>} />
 
     </Route>
   </Routes>

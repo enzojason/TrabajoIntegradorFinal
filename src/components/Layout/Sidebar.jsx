@@ -13,10 +13,9 @@ const Sidebar = () => (
          <li>  <Link to="/artistas">Artistas</Link> </li>
          <li>  <Link to="/albumes">Álbumes</Link> </li>
          <li>  <Link to="/generos">Géneros</Link> </li>
+         <li>  <button className="button is-primary is-light"> <Link to="/itemList">Listar Items</Link>  </button> </li>
       </ul>
     </div>
-
-
     <div>
       <Buscar/>
     </div>

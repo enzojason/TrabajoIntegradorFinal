@@ -150,3 +150,74 @@ export const fetchArtists  = async () => {
   return data;
 };
 
+//PARA PLAYLIST
+
+export const createPlaylist = async (playlistData) => {
+  const url = 'https://sandbox.academiadevelopers.com/harmonyhub/playlists/';
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Token ${state.userData.token}` // Asegúrate de incluir el token de autenticación si es necesario
+      },
+      body: JSON.stringify(playlistData)
+    });
+
+    if (!response.ok) {
+      throw new Error('Error al crear la playlist');
+    }
+
+    const data = await response.json();
+    console.log('Playlist creada:', data);
+    // Aquí puedes manejar la respuesta, como cerrar el modal o actualizar la lista de playlists
+  } catch (error) {
+    console.error('Error:', error);
+  }
+};
+
+
+// Crear un nuevo componente, a partir de Data(objeto) y la ruta de la API 
+export const createComponent = async (Data,ruta) => {
+  const token = localStorage.getItem("authToken");
+  const response = await fetch(`${API_URL}/${ruta}/`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Token ${token}`
+    },
+    body: Data
+  });
+
+  const data = await response.json();
+  if (!response.ok) throw new Error(data.message);
+  return data;
+};
+
+// Actualizar un componente, a partir de datos, ruta y id
+export const updateComponent = async (datos,ruta,id) => {
+  const token = localStorage.getItem("authToken");
+  const response = await fetch(`${API_URL}/${ruta}/${id}`, {
+    method: 'PUT',
+    headers: { 
+               'Authorization': `Token ${token}`
+     },
+    body: datos
+  });
+  const data = await response.json();
+  if (!response.ok) throw new Error(data.message);
+  return data;
+};
+
+// Eliminar un componente, a partir de la ruta y el id
+export const deleteComponent = async (ruta,id) => {
+  console.log("id song delete ",id);
+  const token = localStorage.getItem("authToken");
+  const response = await fetch(`${API_URL}/${ruta}/${id}/`, {
+    method: 'DELETE',
+    headers: { 
+               'Authorization': `Token ${token}`
+     }
+  });
+  if (!response.ok) throw new Error(response.message);
+  return response;
+};

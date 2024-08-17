@@ -66,7 +66,7 @@ function Login() {
                                                 name="username"
                                                 ref={usernameRef}
                                             />
-                                            <span class="icon is-small is-left">
+                                            <span clasName="icon is-small is-left">
                                                 <FontAwesomeIcon icon={faUser} />
                                             </span>
                                         </div>

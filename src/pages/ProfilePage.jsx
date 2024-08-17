@@ -25,6 +25,11 @@ function Profile() {
     };
 
     const { token } = useAuth("state");
+    const { data } = useAuth("state");
+    console.log("Auth State:", {token});
+    console.log("Auth State:", {data});
+    const userId = data?.user__id;
+    console.log("ID:", data.user__id);
 
     const doFetch = async () => {
         setLoadingUpdate(true);

@@ -43,7 +43,7 @@ const SongForm = ({ song = {}, onSave }) => {
       <form onSubmit={handleSubmit}>
           <div className="card-content">
                 <label className="label">Iagen de Portada:</label>
-                <input class="input is-focused"
+                <input className="input is-focused"
                     type="file"
                     accept=".jpg"//"image/*"
                     id="cover"
@@ -56,25 +56,25 @@ const SongForm = ({ song = {}, onSave }) => {
 
           <div className="card-content">
             <label className='label' >Título</label>
-            <input class="input is-focused" type="text" value={title} onChange={(e) => setTitle(e.target.value)} required />
+            <input className="input is-focused" type="text" value={title} onChange={(e) => setTitle(e.target.value)} required />
           </div>
 
           <div className="card-content">
             <label className='label'>Año</label>
-            <input class="input is-focused" type="number" value={year} onChange={(e) => setYear(e.target.value)} required />
+            <input className="input is-focused" type="number" value={year} onChange={(e) => setYear(e.target.value)} required />
           </div>
 
           <div className="card-content">
             <label className='label'>Álbum</label>
-            <input class="input is-focused" type="number" value={album} onChange={(e) => setAlbum(e.target.value)} />
+            <input className="input is-focused" type="number" value={album} onChange={(e) => setAlbum(e.target.value)} />
           </div>
 
           <div className="card-content">
             <label className='label'>Canción (Archivo .mp3)</label>
-            <input class="input is-focused" type="file" accept=".mp3" onChange={handleFileChange} />
+            <input className="input is-focused" type="file" accept=".mp3" onChange={handleFileChange} />
           </div>
 
-          <div  class="field">
+          <div  className="field">
             <button className="button is-link" type="submit">Guardar</button>
           </div>
           

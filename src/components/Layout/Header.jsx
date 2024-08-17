@@ -19,37 +19,34 @@ const Header = () => {
   //const {actions} = useContext(AuthContext);
 
   return (
-    <header className="navbar is-dark">
-       <div className="navbar-brand">
-          <Link to="/" className="navbar-item">
-            <img className='is-rounded'
-            src={musica} alt="Logo" />
-          </Link>
+    <header className="navbar" role="navigation" aria-label="main navigation">
+        <div className="navbar-brand" >
+            <a className="button is-white has-text-primary navbar-item" href="/"> Home </a>                     
         </div>
 
         {isAuthenticated ? (
                           <>
-                            <a className ="button" ><Link to="/">Home</Link></a>
                             <div className="navbar-end">
-                              <Link to="/profile" className="navbar-item">
-
-                                <figure className="image is-35x35">
+                              <Link to="/profile" className="navbar-item">  </Link>
+                            </div>
+                            <div style={{width: "100px", height: "100%",}}>
+                                 <figure className="image is-35x35">
                                   <img className="is-rounded" src={drstrange} alt="User profile" />
                                 </figure>
-                                <span>  </span>
-                              </Link>
                             </div>
 
-                            <a className ="button"> <Link to="/profile"> Perfil </Link> </a>
+                            <button className ="button"> <Link to="/profile"> Perfil </Link> </button>
                             <button className="button is-danger is-outlined" onClick={logout}> Salir </button>
                             
                           </>
                         ) : ( 
-                          <div className="navbar-end">
-                                <button className="button is-primary is-light">
-                                              <Link to="/login">Iniciar Sesion</Link>
-                                </button>
-                          </div>
+                          <>
+                              <div className="navbar-end">
+                                    <button className="button is-primary is-light">
+                                                  <Link to="/login">Iniciar Sesion</Link>
+                                    </button>
+                              </div>
+                          </>
                         )}
       
     </header>
