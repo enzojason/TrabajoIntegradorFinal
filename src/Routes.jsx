@@ -7,6 +7,7 @@ import ProfilePage from './pages/ProfilePage';
 import PrivateRoute from './components/PrivateRoute';
 import Buscar from './components/Music/Buscar'
 import ItemList from './components/AllItems/ItemList'
+import PlaylistForm from './components/AllItems/PlaylistForm';
 
 const AppRoutes = () => (
   <Routes>
@@ -18,6 +19,7 @@ const AppRoutes = () => (
       <Route path="/profile" element={<PrivateRoute> <ProfilePage /> </PrivateRoute>} />
       <Route path="/buscar" element={<Buscar />} />
       <Route path="/itemList" element={<ItemList/>} />
+      <Route path="/create/playLists" element={<PlaylistForm/>} />
 
     </Route>
   </Routes>
