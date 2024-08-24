@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { createSong, updateSong } from '../../services/api';
+import { createSong, updateSong, createPlaylistEntry  } from '../../services/api';
 
-const SongForm = ({ song = {}, onSave }) => {
+const SongForm = ({ song = {}, album={}, artists={}, genres={}, playlistId, currentOrder, onSave }) => {
   const [cover, setCover] = useState(song.cover || '');
   const [title, setTitle] = useState(song.title || '');
   const [year, setYear] = useState(song.year || '');
-  const [album, setAlbum] = useState(song.album || '');
+  //const [album, setAlbum] = useState(song.album || '');
   const [songFile, setSongFile] = useState(null); // Inicializamos como null para almacenar el archivo
 
   const handleFileChange = (e) => {
@@ -18,7 +18,7 @@ const SongForm = ({ song = {}, onSave }) => {
     const formData = new FormData();
     formData.append('title', title);
     formData.append('year', year);
-    formData.append('album', album);
+    //formData.append('album', album);
 
     if (songFile) {
       formData.append('song_file', songFile); // Añadimos el archivo al FormData
@@ -26,13 +26,15 @@ const SongForm = ({ song = {}, onSave }) => {
 
     try {
       if (song.id) {
-        await updateSong(song.id, formData); // Enviamos FormData para actualizar
+        await updateSong(song.id, formData); //actualizar
       } else {
-        await createSong(formData); // Enviamos FormData para crear
+        const {song} = await createSong(formData); //crear
+        await createPlaylistEntry(playlistId, song.id, currentOrder + 1); // nueva entrada en playlist
+        //onSave();
       }
       onSave();
     } catch (error) {
-      alert('Error saving song: ' + error.message);
+      alert('Error al Guardar la Canción: ' + error.message);
     }
   };
 
@@ -56,28 +58,32 @@ const SongForm = ({ song = {}, onSave }) => {
 
           <div className="card-content">
             <label className='label' >Título</label>
-            <input className="input is-focused" type="text" value={title} onChange={(e) => setTitle(e.target.value)} required />
+            <input className="input is-focused" type="text" value={title} 
+                    onChange={(e) => setTitle(e.target.value)} required />
           </div>
 
           <div className="card-content">
             <label className='label'>Año</label>
-            <input className="input is-focused" type="number" value={year} onChange={(e) => setYear(e.target.value)} required />
+            <input className="input is-focused" type="number" value={year}  
+                    onChange={(e) => setYear(e.target.value)} required />
           </div>
 
-          <div className="card-content">
-            <label className='label'>Álbum</label>
-            <input className="input is-focused" type="number" value={album} onChange={(e) => setAlbum(e.target.value)} />
-          </div>
+
 
           <div className="card-content">
             <label className='label'>Canción (Archivo .mp3)</label>
-            <input className="input is-focused" type="file" accept=".mp3" onChange={handleFileChange} />
+            <input className="input is-focused" type="file"   
+                  accept=".mp3" onChange={handleFileChange} />
           </div>
+          <div className="field is-grouped">
+              <div  className="field">
+                <button className="button is-link" type="submit">Guardar</button>
+              </div>
 
-          <div  className="field">
-            <button className="button is-link" type="submit">Guardar</button>
+              <div className="control">
+                    <button className='button is-light' type="button" onClick = {onSave}>Cancelar</button>
+              </div> 
           </div>
-          
       </form>
     </div>
   );
@@ -85,6 +91,11 @@ const SongForm = ({ song = {}, onSave }) => {
 
 export default SongForm;
 
+//<div className="card-content">
+//<label className='label'>Álbum</label>
+//<input className="input is-focused" type="number" value={album} 
+//        onChange={(e) => setAlbum(e.target.value)} />
+//</div>
 
 /* 
 import React, { useState } from 'react';

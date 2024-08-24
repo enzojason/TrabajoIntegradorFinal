@@ -3,9 +3,13 @@ import SongCard from "./SongCard";
 import Modal from "./Modal"; 
 import PlaylistForm from "./PlaylistForm";
 import playlistIco from "../../assets/playlist.png";
+import SongForm from "../Music/SongForm";
 
 function PlaylistCard({ playlist, user }) {
-    const [isModalActive, setIsModalActive] = useState(false);
+    const [isModalPlayList, setIsModalPlayList] = useState(false);
+    const [isModalAddSong, setIsModalAddSong] = useState(false);
+
+    
     const [showSongs, setShowSongs] = useState(false);
     const [songs, setSongs] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -19,7 +23,18 @@ function PlaylistCard({ playlist, user }) {
     const hasEntries = Array.isArray(playlist.entries) && playlist.entries.length > 0;
 
     const handleEditClick = () => {
-        setIsModalActive(true);
+        setIsModalPlayList(true);
+    };
+
+    const handleCloseModal = () => {
+        setIsModalPlayList(false);
+        setIsModalAddSong(false);
+        // Aquí puedes refrescar la lista de playlists o hacer otra lógica de actualización
+    };
+
+    const handleSave = () => {
+        setIsModalPlayList(false);
+        // Aquí puedes agregar lógica adicional, como refrescar la lista de playlists
     };
 
     const handleDeleteClick = async () => {
@@ -39,7 +54,7 @@ function PlaylistCard({ playlist, user }) {
             // Aquí puedes agregar lógica para actualizar la UI después de eliminar la playlist
         } catch (error) {
             console.error("Error eliminando la playlist:", error);
-            // Manejar el error
+            
         }
         finally{
             window.location.reload();
@@ -47,7 +62,7 @@ function PlaylistCard({ playlist, user }) {
     };
 
     const handleAddItemClick = () => {
-        // Aquí podrías abrir un modal o una ventana emergente para seleccionar y agregar una canción
+        setIsModalAddSong(true); // Aquí podrías abrir un modal o una ventana emergente para seleccionar y agregar una canción
     };
 
     const toggleShowSongs = () => {
@@ -73,7 +88,7 @@ function PlaylistCard({ playlist, user }) {
     };
 
     return (
-        <div className="card has-background-dark" style={{width: "300px", height: "100%"}}>
+        <div className="card has-background-dark" style={{maxWidth: "300px", height: "100%", display: "flex", flexDirection: "column"}}>
             <div className="card-image">
                 <figure className="image is-4by3">
                     {playlist.cover ? (
@@ -84,7 +99,7 @@ function PlaylistCard({ playlist, user }) {
                 </figure>
             </div>
 
-            <div className="card-content">
+            <div className="card-content"style={{ flex: "1 0 auto" }}>
                 <div className="media">
                     <div className="media-content">
                         <p className="title is-4 has-text-white">{playlist.name}</p>
@@ -95,16 +110,22 @@ function PlaylistCard({ playlist, user }) {
                 </div>
 
                 {isOwner && (
-                    <div className="buttons">
+                    <div className="buttons"  style={{display: "flex", flexWrap: "wrap", marginTop: "auto"}}>
                         <button className="button is-info" onClick={handleEditClick}>Editar</button>
                         <button className="button is-danger" onClick={handleDeleteClick}>Eliminar</button>
-                        <button className="button is-primary" onClick={handleAddItemClick}>Agregar Elemento</button>
+                        <button className="button is-primary" onClick={handleAddItemClick}>Agregar<br />Canción</button>
+
+                        {(hasEntries || (isOwner)) && (
+                            <button className="button is-light mt-3" onClick={toggleShowSongs}>
+                                {showSongs ? "Ocultar" : "Canciones"}
+                            </button>
+                        )}
                     </div>
                 )}
 
                 {(hasEntries || (isOwner && songs.length > 0)) && (
                     <button className="button is-light mt-3" onClick={toggleShowSongs}>
-                        {showSongs ? "Ocultar Canciones" : "Mostrar Canciones"}
+                        {showSongs ? "Ocultar" : "Canciones"}
                     </button>
                 )}
 
@@ -122,11 +143,23 @@ function PlaylistCard({ playlist, user }) {
                     </div>
                 )}
 
-                {isModalActive && (
-                    <Modal onClose={() => setIsModalActive(false)}>
-                        <PlaylistForm playlist={playlist} onClose={handleCloseModal} />
-                    </Modal>
+                {isModalPlayList && (
+                        <Modal isActive={isModalPlayList} 
+                        closeModal={handleCloseModal} 
+                        children={<PlaylistForm playlist={playlist} onSave={handleSave}/> }
+                        /> 
+                            
+                        
                 )}
+                {isModalAddSong && (
+                        <Modal isActive={isModalAddSong} 
+                        closeModal={handleCloseModal} 
+                        children={<SongForm playlistId={playlist.id} onSave={handleSave} currentOrder={playlist.length}/> }
+                        /> 
+                            
+                        
+                )}
+
             </div>
         </div>
     );
@@ -134,7 +167,7 @@ function PlaylistCard({ playlist, user }) {
 
 export default PlaylistCard;
 
-
+// <PlaylistForm playlist={playlist} onSave={handleSave} />
 /*
 import React, { useState, useEffect } from "react";
 import SongCard from "./SongCard"; 

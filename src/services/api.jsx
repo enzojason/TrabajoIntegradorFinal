@@ -176,6 +176,30 @@ export const createPlaylist = async (playlistData) => {
   }
 };
 
+export const createPlaylistEntry = async (playlistId, songId, order) => {
+  const token = localStorage.getItem("authToken");
+
+  const response = await fetch(`${API_URL}/playlist-entries/`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Token ${state.userData.token}`
+    },
+    body: JSON.stringify({
+      playlist: playlistId,
+      song: songId,
+      order: order
+    })
+  });
+
+  const data = await response.json();
+  if (!response.ok) throw new Error(data.message);
+  return data;
+};
+
+
+////////// FIN PLAYLIST//////////////////////////////
+
 
 // Crear un nuevo componente, a partir de Data(objeto) y la ruta de la API 
 export const createComponent = async (Data,ruta) => {

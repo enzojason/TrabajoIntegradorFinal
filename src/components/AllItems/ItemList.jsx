@@ -166,14 +166,16 @@ function ItemList() {
                         Crear nuevo {itemType}
                     </button>
                 </div>
-                <div className="buttons">
+
+                {items.length > 25 ? (<div className="buttons">
                     <button className="button" onClick={() => setPage((prevPage) => Math.max(prevPage - 1, 1))}>
                         Página anterior
                     </button>
                     <button className="button" onClick={() => setPage((prevPage) => prevPage + 1)}>
                         Siguiente página
                     </button>
-                </div>
+                </div>):(<div></div>)}
+
                 <div className="columns is-multiline is-centered" style={{ margin: '20px 0' }}>
                     {items.length > 0 ? (
                         items.slice((page - 1) * 25, page * 25).map((item) => (
@@ -192,7 +194,7 @@ function ItemList() {
                                 {itemType === "albums" && <AlbumCard album={item} />}
                             </div>
                         ))
-                    ) : (
+                    ) : ( 
                         <div>
                             <p>Aún no has creado {itemType === "songs" ? "canciones" : itemType}</p>
                             <button className="button is-primary" onClick={handleCreateNewItem}>

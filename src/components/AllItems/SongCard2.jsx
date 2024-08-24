@@ -192,8 +192,8 @@ const SongCard2 = ({ item, type, checked ,onDelete, onEdit }) => {
             <div className="buttons">
               {(type === 'song') && (checked===true)&&(
                 <>
-                  <button className="button is-warning" onClick={() => onEdit(song)}>Editar</button>
-                  <button className="button is-danger" onClick={() => onDelete(song.id)}>Eliminar</button>
+                  <button className="button is-warning" onClick={() => onEdit(item)}>Editar</button>
+                  <button className="button is-danger" onClick={() => onDelete(item.id)}>Eliminar</button>
                 </>
               )}
             </div>
