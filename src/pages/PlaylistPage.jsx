@@ -32,7 +32,7 @@ const PlaylistPage = () => {
     }
     
     return (
-        <div>
+        <div className="mr-5">
             <div className="hero-body">
           <div className='column .is-offset-x'></div>
           <div className='column .is-offset-x'></div>

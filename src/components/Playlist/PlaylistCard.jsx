@@ -86,7 +86,7 @@ const handleEdit = (playlist) => {
 
   return (
     
-    <div>
+    <div className="my-4">
         {isCreating ? (<PlaylistForm onSave={handleSave} playlist={playlist} />) : ( //aquie llamamos al formulario de playlist
          <div  className='card'>
           <div className='card-content'>
