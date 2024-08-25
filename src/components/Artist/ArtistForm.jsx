@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
-import { createComponent, updateComponent } from '../../services/api';
+import { createArtist, updateComponent } from '../../services/api';
 
 const ArtistForm = ({ artist = {}, onSave }) => {
   // Formulario para crear o editar un artista
@@ -25,7 +25,6 @@ const ArtistForm = ({ artist = {}, onSave }) => {
     formData.append('bio', bio);
     formData.append('website', website);
 
-    console.log("FORM DATA ",formData);
 
     if (image) {
       formData.append('image', image);
@@ -37,18 +36,17 @@ const ArtistForm = ({ artist = {}, onSave }) => {
         await updateComponent(formData,'artists',artist.id); // Enviamos FormData para crear
       }
       else{
-        const response = await createComponent(formData,"artists"); // Enviamos FormData para crear
+        await createArtist(formData); // Enviamos FormData para crear
       }
       onSave();
       console.log("guardado");
       setIsLoading(false);
       alert('Artist saved successfully');
-      window.location.reload();
+      location.reload();
 
     } catch (error) {
       setIsLoading(false);
       alert('Error saving artist: ' + error.message);
-      window.location.reload();
     }
 
   };
@@ -61,30 +59,30 @@ const ArtistForm = ({ artist = {}, onSave }) => {
       <form className='box' onSubmit={handleSubmit}>
             
             <div className="field">
-              <label class="label">Nombre: </label>
-              <div class="control">
-                <input class="input" type="text" placeholder="Nombre del Artista" value={name} onChange={(e) => setName(e.target.value)}/>
+              <label className="label">Nombre: </label>
+              <div className="control">
+                <input className="input" type="text" placeholder="Nombre del Artista" value={name} onChange={(e) => setName(e.target.value)} required/>
               </div>
               
             </div>
             <div className="field">
-              <label class="label">Bio: </label>
-              <input class="input" type="text" placeholder="Info del Artista" value={bio} onChange={(e)=> setBio(e.target.value)} />
+              <label className="label">Bio: </label>
+              <input className="input" type="text" placeholder="Info del Artista" value={bio} onChange={(e)=> setBio(e.target.value)} />
             </div>
 
             <div className="field">
-              <label class="label">Sitio Web: </label>
-              <input class="input" type="text" placeholder="www" value={website} onChange={(e) => setWebsite(e.target.value)} />
+              <label className="label">Sitio Web: </label>
+              <input className="input" type="text" placeholder="www" value={website} onChange={(e) => setWebsite(e.target.value)} />
             </div>
 
             <div className="field">
-              <label class="label">Imagen (.png .jpeg)</label>
-              <input class="input" type="file" accept=".png, .jpeg, .jpg" onChange={handleImageChange}/>
+              <label className="label">Imagen (.png .jpeg)</label>
+              <input className="input" type="file" accept=".png, .jpeg, .jpg" onChange={handleImageChange}/>
             </div >
 
               {isLoading ? <h1>Cargando...</h1>
               : 
-              (<div class="field is-grouped">
+              (<div className="field is-grouped">
                   <div className="control">
                     <button className='button is-link' type="submit">Guardar</button>
                   </div>

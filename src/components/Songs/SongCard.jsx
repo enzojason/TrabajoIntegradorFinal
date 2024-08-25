@@ -22,6 +22,7 @@ const SongCard = ({ item:song }) => {
 
 const handleDelete = async (id) => {
   //manejador de eliminar cancion y las elimina en un fetch
+  setIsCreating(true);
     try{
       await deleteComponent('songs', id);  
       console.log("delete song: ",id);
@@ -98,9 +99,13 @@ if (isError) return <p>Error al cargar las canciones.</p>;
 
         {profileData.user__id===song.owner && 
         <div className="buttons">
+          {isCreating ? <p>Cargando...</p> :
+          <>
           <button className="button is-warning" onClick={() => handleEdit(song)}>Editar</button>
           <button className="button is-danger" onClick={() => handleDelete(song.id)}>Eliminar</button>
+          </>}
         </div>
+        
         }
 
       </div>

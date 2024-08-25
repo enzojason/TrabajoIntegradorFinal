@@ -2,11 +2,13 @@
 /* eslint-disable react/prop-types */
 import React, {  useState } from 'react';
 import { createComponent } from '../../services/api';
+import { useNavigate } from 'react-router-dom';
 
 const GenreForm = ({ genero = {}, onSave }) => {
-  const [name, setName] = useState(genero.name || '');
-  const [description,setDescription] = useState(genero.description || '');
+  const [name, setName] = useState(genero.name ? genero.name : '');
+  const [description,setDescription] = useState(genero.description ? genero.description : '');
   const[songs,setSongs] = useState([]);
+  const navigate = useNavigate(); // Hook para redirigir
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,17 +17,19 @@ const GenreForm = ({ genero = {}, onSave }) => {
     formData.append('name', name);
     formData.append('description', description);
 
-    console.log("FORM DATA ",formData);
     try {
       
       const data = await createComponent(formData,"genres"); // Enviamos FormData para crear
       console.log("DATA ",data);
       onSave();
       console.log("guardado");
-      alert('Song saved successfully');
+      alert('Genre saved successfully');
+      
     } catch (error) {
       alert('Error saving song: ' + error.message);
+      
     }
+    navigate('/genres');
   };
 
   return (
@@ -36,15 +40,15 @@ const GenreForm = ({ genero = {}, onSave }) => {
         <form className='box' onSubmit={handleSubmit}>
 
           <div className="field">
-            <label class="label">Nombre: </label>
-            <input class="input" type="text" value={name} onChange={(e) => setName(e.target.value)} required />
+            <label className="label">Nombre: </label>
+            <input className="input" type="text" value={name} onChange={(e) => setName(e.target.value)} required />
           </div>
 
           <div className="field">
-            <label class="label">Description: </label>
-            <input class="input" type="text" value={description} onChange={(e)=> setDescription(e.target.value)} />
+            <label className="label">Description: </label>
+            <input className="input" type="text" value={description} onChange={(e)=> setDescription(e.target.value)} />
           </div>
-          <div class="field is-grouped">
+          <div className="field is-grouped">
                   <div className="control">
                     <button className='button is-link' type="submit">Guardar</button>
                   </div>

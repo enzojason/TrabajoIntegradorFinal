@@ -1,5 +1,8 @@
+/* eslint-disable no-undef */
 import React, { useEffect, useState } from 'react';
-import { createComponent } from '../../services/api';
+import { createComponent ,updateComponent} from '../../services/api';
+import { DataContext } from '../../contexts/DataContext';
+import { useContext } from 'react';
 
 const AlbumForm = ({ album = {}, onSave }) => {
   // Formulario para crear o editar un album
@@ -8,40 +11,53 @@ const AlbumForm = ({ album = {}, onSave }) => {
   const [artist, setArtist] = useState(album.artist || '');
   const [cover, setCover] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const{artistData} = useContext(DataContext);
+
 
   const handleImageChange = (e) => {
     // Manejador de cambio de imagen
     setCover(e.target.files[0]);
   }
 
+  const handleSelectChange = (e) => {
+    setArtist(e.target.value);
+  };
+
   const handleSubmit = async (e) => {
     // Manejador de envio de formulario
     e.preventDefault();
+
+  
 
     const formData = new FormData();
     formData.append('title', title);
     formData.append('year', year);
     formData.append('artist', artist);
 
-    console.log("FORM DATA ",formData);
     
     if (cover) {
       formData.append('cover', cover);
     }
     try {
       setIsLoading(true);
-      const data = await createComponent(formData,"albums"); // Enviamos FormData para crear
-      console.log("DATA ",data);
+
+      if (album.id) {
+        await updateComponent(formData,'albums',album.id) // Enviamos FormData para actualizar
+      }
+      else
+      {
+        await createComponent(formData,"albums"); // Enviamos FormData para crear
+
+      }
       onSave();
       console.log("guardado");
       setIsLoading(false);
       alert('Album saved successfully');
-      window.location.reload();
+      location.reload();
 
     } catch (error) {
       setIsLoading(false);
       alert('Error saving album: ' + error.message);
-      window.location.reload();
 
     }
   };
@@ -70,7 +86,36 @@ const AlbumForm = ({ album = {}, onSave }) => {
               <div className="field">
                 <label className="label">Artista: </label>
                 <div className="control">
-                <input className="input" type="number" value={artist} onChange={(e) => setArtist(e.target.value)} />
+                  <div className="select">
+                    <select onChange={handleSelectChange} required>
+
+                      {album.artist ?
+                      <>
+                        {artistData.map(artist => (
+                        album.artist === artist.id && (
+                        <option key={artist.id} value={album.artist}>
+                          {artist.name}
+                        </option>
+                        
+                      )))}
+                      </>
+                      :
+                      <>
+                        <option value={''}></option>
+                      </>
+                      }
+                      
+                        
+                      {artistData.map(artist => (
+                      <option key={artist.id} value={artist.id}>
+                      {artist.name}
+                      </option>
+                      ))}
+
+
+                    </select>
+                    </div>
+
                 </div>
               </div>
 

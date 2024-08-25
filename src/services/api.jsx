@@ -14,40 +14,42 @@ export const loginUser = async (username, password) => {
 
 
 
-
-
-
 // Para canciones-Songs (Crear,Leer, Modificar, Eliminar)
-export const createSong = async (songData) => {
+export const createSong = async (Data) => {
   const token = localStorage.getItem("authToken");
-
   const response = await fetch(`${API_URL}/songs/`, {
     method: 'POST',
     headers: {
       'Authorization': `Token ${token}`
-    },
-    body: songData // Directamente se pasa FormData aquí
+      },
+    body: Data
   });
 
   const data = await response.json();
   if (!response.ok) throw new Error(data.message);
+    console.log("API RESPONSE: ", data);
+    console.log("API Res result ", data.results);
   return data;
 };
-/*
-export const createSong = async (songData) => {
+
+
+export const createArtist = async (Data) => {
   const token = localStorage.getItem("authToken");
-  const response = await fetch(`${API_URL}/songs/`, {
+  const response = await fetch(`${API_URL}/artists/`, { 
     method: 'POST',
-    headers: { 'Content-Type': 'application/json',
-               'Authorization': `Token ${token}`
+    headers: {
+      'Authorization': `Token ${token}`
     },
-    body: JSON.stringify(songData)
+    body:Data
   });
+
   const data = await response.json();
   if (!response.ok) throw new Error(data.message);
+  console.log("API RESPONSE: ", data);
+  console.log("API Res result ", data.results);
   return data;
 };
-*/
+
 
 // Trae Todas las canciones
 export const fetchSongs = async () => {
@@ -192,7 +194,7 @@ export const fetchAll = async (ruta) => {
   const token = localStorage.getItem("authToken");
 
   try {
-    const response = await fetch(`${API_URL}/${ruta}?page_size=300`, {
+    const response = await fetch(`${API_URL}/${ruta}?page_size=700`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

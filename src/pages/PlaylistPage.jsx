@@ -13,11 +13,6 @@ const PlaylistPage = () => {
         setIsCreating(true);
         setForm("playlist");
     };
-        const handleCreateEntrie = () => {
-            //manejador de crear entrada
-            setIsCreating(true);
-            setForm("entrie");
-        }
 
     const handleSave = () => {
         //manejador de guardar playlist
@@ -41,9 +36,8 @@ const PlaylistPage = () => {
         </div>
             <div className='column .is-offset-x'></div>
         <div className='column .is-offset-x'></div>
-            <div  class="field is-grouped">
+            <div  className="field is-grouped">
                 <button className='button is-white' onClick={handleCreate}>Nueva Playlist</button>
-                <button className='button is-white' onClick={handleCreateEntrie}>Nueva Entrada</button>
             </div>
             <div>
                 {isCreating ? (

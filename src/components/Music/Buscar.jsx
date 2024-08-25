@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { fetchSongs, fetchGenres, fetchArtists } from '../../services/api';
-import songCard from '../Songs/SongCard';
+import SongCard from '../Songs/SongCard';
 
 const SongSearch = () => {
   const [songs, setSongs] = useState([]);
@@ -105,23 +105,20 @@ const SongSearch = () => {
 
       {searchPerformed && ( // Solo mostrara resultados si se hizo una búsqueda
         <div>
-          <h2>Lista de Canciones</h2>
-          <div className="column">
-                <div className="columns is-mobile is-2">
-                    {filteredSongs.slice(0,10).map((item) => (
-                        <div key={item.id} className="column is-one-fifth">
-                            <SongCard 
-                                item={item} 
-                                type={'song'}
-                                onDelete={() => handleDelete(item.id)} 
-                                onEdit={() => handleEdit(item)} 
-                            />
-                        </div>
-                    ))}
-                </div>
-          </div>
-
-
+          
+          <ul>
+            {filteredSongs.length > 0 ? (
+              filteredSongs.map(song => ( 
+                 <div key={song.id}>
+                    <SongCard item={song} />
+                    
+                 </div>
+              ))
+            ) : (
+              <p>No se encontraron canciones.</p>
+            )}
+          </ul>
+      
         </div>
       )}
     </div>

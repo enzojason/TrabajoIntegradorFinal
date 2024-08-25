@@ -1,8 +1,9 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
-import { createComponent, updateComponent } from '../../services/api';
-
+import { createComponent, createSong, updateComponent } from '../../services/api';
+import { DataContext } from '../../contexts/DataContext';
+import { useContext } from 'react';
 
 const SongForm = ({ song = {}, onSave }) => {
   //Formulario de creacion de canciones
@@ -12,6 +13,7 @@ const SongForm = ({ song = {}, onSave }) => {
   const [songFile, setSongFile] = useState(null); // Inicializamos como null para almacenar el archivo
   const [cover, setCover] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const { albumData,isError} = useContext(DataContext);
 
 
   const handleFileChange = (e) => {
@@ -24,16 +26,19 @@ const SongForm = ({ song = {}, onSave }) => {
     setCover(e.target.files[0]);
   }
 
+  const handleSelectChange = (e) => {
+    setAlbum(e.target.value);
+  };
+
+
   const handleSubmit = async (e) => {
     // Manejador de envio de formulario
     e.preventDefault();
-    console.log("TITLE ",title);
     const formData = new FormData();
     formData.append('title', title);
     formData.append('year', year);
     formData.append('album', album);
 
-    console.log("FORM DATA ",formData);
     if (songFile) {
       formData.append('song_file', songFile); // Añadimos el archivo al FormData 
     }
@@ -46,19 +51,17 @@ const SongForm = ({ song = {}, onSave }) => {
         if (song.id) {
         await updateComponent(formData,'songs',song.id) // Enviamos FormData para actualizar
       } else {
-        const response = await createComponent(formData,"songs"); // Enviamos FormData para crear
-        console.log("song form data: ",response.results); 
+        await createSong(formData); // Enviamos FormData para crear
         }
       onSave();
       console.log("guardado");
       setIsLoading(false);
       alert('Song saved successfully');
-      window.location.reload();
+      location.reload();
 
     } catch (error) {
       setIsLoading(false);
       alert('Error saving song: ' + error.message);
-      window.location.reload();
     }
     
   };
@@ -72,36 +75,65 @@ const SongForm = ({ song = {}, onSave }) => {
 
             <div className="field">
               <label className='label'>Título</label>
-              <div class="control">
-                  <input class="input is-focused" type="text" value={title} onChange={(e) => setTitle(e.target.value)} required />
+              <div className="control">
+                  <input className="input is-focused" type="text" value={title} onChange={(e) => setTitle(e.target.value)} required />
               </div>
             </div>
 
             <div className="field">
               <label className='label'>Año</label>
-                <div class="control">
-                  <input class="input is-focused" type="number" value={year} onChange={(e) => setYear(e.target.value)} required />
+                <div className="control">
+                  <input className="input is-focused" type="number" value={year} onChange={(e) => setYear(e.target.value)}  />
                 </div>
             </div>
 
             <div className="field">
               <label className='label'>Álbum</label>
-              <div class="control">
-                  <input class="input is-focused" type="number" value={album} onChange={(e) => setAlbum(e.target.value)} />
+              <div className="control">
+                <div className="select">
+                  <select onChange={handleSelectChange} required>
+
+
+                      {song.album ?
+                          <>
+                            {albumData.map(album => (
+                            song.album === album.id && (
+                            <option key={album.id} value={song.album}>
+                              {album.title}
+                            </option>
+                            
+                          )))}
+                          </>
+                          :
+                          <>
+                            <option value={''}></option>
+                          </>
+                          }
+
+                    {albumData.map(album => (
+                    <option key={album.id} value={album.id}>
+                    {album.title} {/* Muestra el nombre del álbum */}
+                    </option>
+                    ))}
+
+
+
+                  </select>
+                  </div>
               </div>
             </div>
 
             <div className="field">
               <label className='label'>Canción (archivo .mp3)</label>
-              <div class="control">
-                <input class="input is-focused" type="file" accept=".mp3" onChange={handleFileChange} />
+              <div className="control">
+                <input className="input is-focused" type="file" accept=".mp3" onChange={handleFileChange} />
               </div>
             </div>
 
             <div className="field">
               <label className='label'>Imagen (.png .jpeg)</label>
-              <div class="control">
-                <input class="input is-focused" type="file" accept=".png, .jpeg, .jpg" onChange={handleImageChange}/>
+              <div className="control">
+                <input className="input is-focused" type="file" accept=".png, .jpeg, .jpg" onChange={handleImageChange}/>
               </div>
             </div>
             {isLoading ? <h1>Cargando...</h1>

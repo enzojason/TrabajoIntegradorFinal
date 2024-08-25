@@ -5,11 +5,9 @@ import { createComponent } from '../../services/api';
 import { DataContext } from '../../contexts/DataContext';
 import { useContext } from 'react';
 
-const EntrieForm = ({id_playlist, onSave} ) => {
+const SongGenreForm = ({id_genero,onSave} ) => {
   //Formulario de creacion de entradas de playlist
-  const id = id_playlist;
   const [order, setOrder] = useState('');
-  const [playlist, setPlaylist] = useState(id_playlist ? id_playlist : null);
   const [song,setSong] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const {songData} = useContext(DataContext);
@@ -20,21 +18,19 @@ const EntrieForm = ({id_playlist, onSave} ) => {
     setSong(e.target.value);
   };
 
-  const handleSelectChangePlaylist = (e) => {
-    setPlaylist(e.target.value);
-  }
+  
   const handleSubmit = async (e) => {
     //manejador de datos del formulario
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append('order', order);
-    formData.append('playlist', playlist);
-    formData.append('song', song);
-
+    formData.append('song', song); 
+    formData.append('genre', id_genero);
+    console.log("SONG  ",formData.get('song'));
+    console.log("GENRE ",formData.get('genre'));
     try {
       setIsLoading(true); 
-      const data = await createComponent(formData,"playlist-entries"); // Enviamos FormData para crear 
+      const data = await createComponent(formData,"song-genres"); // Enviamos FormData para crear 
       console.log("DATA ",data);
       onSave();
       console.log("guardado");
@@ -55,14 +51,7 @@ const EntrieForm = ({id_playlist, onSave} ) => {
         style={{width: "600px", 
         height: "100%",}}> 
     <form className='box' onSubmit={handleSubmit}>
-      <div className="field">
-        <label className="label">Orden: </label>
-        <div className="control">
-          <input className="input" type="number" value={order} onChange={(e) => setOrder(e.target.value)} />
-        </div>
-      </div>
-
-
+      
       <div className="field">
         <label className="label">Canción: </label>
         <div className="control">
@@ -99,4 +88,4 @@ const EntrieForm = ({id_playlist, onSave} ) => {
   );
 };
 
-export default EntrieForm;
+export default SongGenreForm;
