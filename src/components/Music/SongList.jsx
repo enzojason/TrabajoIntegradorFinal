@@ -76,24 +76,14 @@ function SongList({tipo}) {
                     </select>
                 </div>
 
-                {user && (
-                    <div className="field">
-                        <input 
-                            type="checkbox" 
-                            id="filterByUser" 
-                            checked={filterByUser}
-                            onChange={(e) => setFilterByUser(e.target.checked)}
-                        />
-                        <label className='label' htmlFor="filterByUser">Filtrar por mi usuario</label>
-                    </div>
-                )}
-
-                <div className="columns is-vcentered is-mobile">
+                  <div className="columns is-vcentered is-mobile">
 
                     <div className="column is-narrow">
                         {previousPage && 
-                        <button className="button" onClick={() => fetchPage(previousPage)}>
-                            Anterior
+                        <button className="button has-background-light" onClick={() => fetchPage(previousPage)}>
+                                <span className="icon has-text-primary">
+                                        <i className="fas fa-arrow-left"></i>
+                                </span>
                         </button>
                         }
                     </div>
@@ -113,8 +103,10 @@ function SongList({tipo}) {
                     </div>
                     <div className="column is-narrow">
                         {nextPage && 
-                        <button className="button" onClick={() => fetchPage(nextPage)}>
-                            Siguiente
+                        <button className="button has-background-light" onClick={() => fetchPage(nextPage)}>
+                                <span className="icon has-text-primary">
+                                        <i className="fas fa-arrow-right"></i>
+                                </span>
                         </button>
                         }
                     </div>
@@ -135,6 +127,19 @@ function SongList({tipo}) {
 export default SongList;
 
 /*
+
+              {user && (
+                    <div className="field">
+                        <input 
+                            type="checkbox" 
+                            id="filterByUser" 
+                            checked={filterByUser}
+                            onChange={(e) => setFilterByUser(e.target.checked)}
+                        />
+                        <label className='label' htmlFor="filterByUser">Filtrar por mi usuario</label>
+                    </div>
+                )}
+
                 <span c class="icon is-small is-left">
                     <FontAwesomeIcon icon={faUser} />
                 </span>

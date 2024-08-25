@@ -42,7 +42,7 @@ const Header = () => {
                               </Link>
                             </div>
 
-                            <Link to="/profile"> Perfil </Link>
+                            <Link to="/profile" className="button"> Perfil </Link>
                             <button className="button is-danger is-outlined" onClick={logout}> Salir </button>
                             
                           </>
