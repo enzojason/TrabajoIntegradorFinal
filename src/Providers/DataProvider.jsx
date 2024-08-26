@@ -12,6 +12,7 @@ const DataProvider = ({ children }) => {
     const [albumData, setAlbumData] = useState([]);
     const [playlistData,setPlaylistData] = useState([]);
     const [entriesData, setEntriesData] = useState([]);
+    const [genreData, setGenreData] = useState([]);
     const [song_genreData, setSong_genreData] = useState([]);
     const [song_artistData, setSong_artistData] = useState([]);
 
@@ -38,6 +39,8 @@ const DataProvider = ({ children }) => {
           const dataart = await fetchAll('artists');
           setArtistData(dataart.results);
           
+          const datagenre = await fetchAll('genres');
+          setGenreData(datagenre.results);
 
           const dataentries = await fetchAll('playlist-entries');
           setEntriesData(dataentries.results);
@@ -68,7 +71,7 @@ const DataProvider = ({ children }) => {
     if (isLoading) return <p>Loading...</p>;
     if (isError) return <p>Error fetching data</p>;
 return (
-        <DataContext.Provider value={{ songData, albumData,artistData, playlistData,entriesData, profileData, song_genreData,song_artistData,isLoading, isError }}>
+        <DataContext.Provider value={{ songData, albumData,artistData,genreData, playlistData,entriesData, profileData, song_genreData,song_artistData,isLoading, isError }}>
         {children}
         </DataContext.Provider>
     );

@@ -46,7 +46,6 @@ export const createArtist = async (Data) => {
   const data = await response.json();
   if (!response.ok) throw new Error(data.message);
   console.log("API RESPONSE: ", data);
-  console.log("API Res result ", data.results);
   return data;
 };
 

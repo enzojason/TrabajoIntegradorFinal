@@ -18,6 +18,9 @@ import AlbumDetail from './components/Music/AlbumDetail';
 import GenreDetail from './components/Music/GenreDetail';
 import ArtistDetail from './components/Music/ArtistDetail';
 
+import MyBiblioteca from './components/AllItems/MyBiblioteca'
+
+
 
 const AppRoutes = () => (
   <Routes>
@@ -37,6 +40,7 @@ const AppRoutes = () => (
       <Route path="/genre/:id" element={<GenreDetail />} />
       <Route path="/artist/:id" element={<ArtistDetail />} />
 
+      <Route path="/myBiblioteca" element={<MyBiblioteca/>} />
       <Route path="*" element={<NotFoundPage />} />
     </Route>
   </Routes>
