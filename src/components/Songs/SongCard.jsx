@@ -55,7 +55,7 @@ if (isLoading) return <p>Cargando...</p>;
 if (isError) return <p>Error al cargar las canciones.</p>;
 
   return (
-  <div>
+  <div className='column is-offset-x m-4'>
     {isCreating ? (<SongForm onSave={handleSave} song={song} />) : (
     <div className="card">
       <div className="card-content">

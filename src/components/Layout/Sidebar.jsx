@@ -19,6 +19,10 @@ const Sidebar = () => (
          <li>  <Link to="/playlists">Playlists</Link> </li>
          <li>  <Link to="/artists">Artistas</Link> </li>
          <li>  <Link to="/genres">Géneros</Link> </li>
+
+
+         <li>  <button className="button is-primary is-light"> <Link to="/myBiblioteca">Mi Biblioteca</Link>  </button> </li>
+         <li>  <button className="button is-primary is-light"> <Link to="/itemList">Buscar</Link>  </button> </li>
       </ul>
           </aside>
         </nav>
@@ -30,3 +34,6 @@ const Sidebar = () => (
 );
 
 export default Sidebar;
+
+//         <li>  <Link to="/myBiblioteca">Mi Biblioteca</Link> </li>
+//         <li>  <Link to="/itemList">Buscar</Link> </li>

@@ -110,7 +110,7 @@ function Profile() {
                         <div className="card-image">
                             <figure className="image is-4by3">
                                 <img
-                                    src={drstrange}//{userData.image || "../"}
+                                    src={userData.image || drstrange}
                                     alt="Imagen de Perfil"
                                     style={{ borderRadius: "10%" ,
                                         width: "100%", 

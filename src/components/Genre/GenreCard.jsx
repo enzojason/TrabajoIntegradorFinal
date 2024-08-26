@@ -49,7 +49,7 @@ const handleEdit = (genre) => {
 
 
   return (
-    <div>
+    <div className='column is-offset-x m-4'>
       {isCreating ? (<GenreForm onSave={handleSave} artist={genres} />) : (
         <div className='card'>
           <div className='card-content'>

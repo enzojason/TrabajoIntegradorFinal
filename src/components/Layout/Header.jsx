@@ -21,13 +21,12 @@ const Header = () => {
 
 
   return (
-    <header className="navbar is-dark">
+    <header className="navbar" role="navigation" aria-label="main navigation">
        <div className="navbar-brand">
           <Link to="/" className="navbar-item">
-            <img className='is-rounded'
-            src={musica} alt="Logo" />
+            <img className='is-rounded' src={musica} alt="Logo" />
           </Link>
-          <a className ="button" ><Link to="/">Home</Link></a>
+          <Link to="/" className ="button is-inverted">Home</Link>
         </div>
 
         {isAuthenticated ? (
@@ -37,23 +36,22 @@ const Header = () => {
                               
                               <p className='subtitle is-size-6'>{profileData.email}</p>
                               <Link to="/profile" className="navbar-item">
-
-                                <figure className="image is-35x35">
+                                <figure className="image is-40x40">
                                   <img className="is-rounded" src={drstrange} alt="User profile" />
                                 </figure>
-                                <span>  </span>
                               </Link>
                             </div>
 
-                            <a className ="button"> <Link to="/profile"> Perfil </Link> </a>
+                            <Link to="/profile" className ="button is-primary is-light"> Perfil </Link>
+                            
                             <button className="button is-danger is-outlined" onClick={logout}> Salir </button>
                             
                           </>
                         ) : ( 
                           <div className="navbar-end">
-                                <button className="button is-primary is-light">
-                                              <Link to="/login">Iniciar Sesion</Link>
-                                </button>
+                                
+                                              <Link to="/login" className="button is-primary is-light">Iniciar Sesion</Link>
+                                
                           </div>
                         )}
       

@@ -50,36 +50,34 @@ const handleEdit = (artist) => {
   if (isError) return <p>Error al cargar los datos</p>;
 
   return ( 
-    <div>
-      {isCreating ? (<ArtistForm onSave={handleSave} artist={artist} />) : (
-   <div className="card">
-   <div className="card-content">
-     <div className="media">
-       <div className="media-left">
-         <figure className="image is-30x30">
-           <img src={artist.image} style={{ maxWidth: '120px', maxHeight: '120px' }} alt="" />
-         </figure>
-       </div>
-       
-       <div className="media-content">
-         <h1 className="title is-4">Artista: <strong>{artist.name}</strong></h1>
-          {artist.bio && <p className="subtitle is-6">Bio: {artist.bio}</p> }
-         {artist.website &&  <p className="subtitle is-6">Sitio Web: <a href={artist.website}>{artist.website}</a></p>}
-         <p className="subtitle is-6">Última Actualización: {new Date(artist.created_at).toLocaleDateString()}</p>
-       </div>
-     </div>
- 
-     {profileData.user__id === artist.owner && (
-       <div className="buttons">
-         <button className="button is-warning" onClick={() => handleEdit(artist)}>Editar</button>
-         <button className="button is-danger" onClick={() => handleDelete(artist.id)}>Eliminar</button>
-       </div>
-     )}
-   </div>
- </div>
-
-
-          )}
+    <div className='column is-offset-x m-4'>
+        {isCreating ? (<ArtistForm onSave={handleSave} artist={artist} />) : (
+            <div className="card">
+                  <div className="card-content">
+                      <div className="media">
+                          <div className="media-left">
+                            <figure className="image is-30x30">
+                              <img src={artist.image} style={{ maxWidth: '120px', maxHeight: '120px' }} alt="" />
+                            </figure>
+                          </div>
+                          
+                          <div className="media-content">
+                            <h1 className="title is-4">Artista: <strong>{artist.name}</strong></h1>
+                              {artist.bio && <p className="subtitle is-6">Bio: {artist.bio}</p> }
+                            {artist.website &&  <p className="subtitle is-6">Sitio Web: <a href={artist.website}>{artist.website}</a></p>}
+                            <p className="subtitle is-6">Última Actualización: {new Date(artist.created_at).toLocaleDateString()}</p>
+                          </div>
+                      </div>
+                  
+                      {profileData.user__id === artist.owner && (
+                        <div className="buttons">
+                          <button className="button is-warning" onClick={() => handleEdit(artist)}>Editar</button>
+                          <button className="button is-danger" onClick={() => handleDelete(artist.id)}>Eliminar</button>
+                        </div>
+                      )}
+                  </div>
+            </div>
+        )}
     </div>
     
   );

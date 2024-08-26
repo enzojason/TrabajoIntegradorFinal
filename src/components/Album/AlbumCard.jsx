@@ -50,7 +50,7 @@ const handleEdit = (album) => {
   if (isError) return <p>Error al cargar los datos</p>;
 
   return (
-    <div>
+    <div className='column is-offset-x m-4'>
         {isCreating ? (<AlbumForm onSave={handleSave} album={album} />) : (
         <div className="card">
         <div className="card-content">
