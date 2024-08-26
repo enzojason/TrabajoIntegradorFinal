@@ -3,6 +3,11 @@ import SongCard from "./SongCard";
 import SongForm from './SongForm';
 import { useEffect, useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
+
+import AlbumDetail from "./AlbumDetail";
+import ArtistDetail from "./ArtistDetail";
+import PlaylistDetail from "./PlaylistDetail";
+import GenreDetail from "./GenreDetail";
 //import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 //import '../../../node_modules/bulma/css/bulma.min.css';
 import Buscar from "./Buscar"
@@ -10,6 +15,9 @@ import Buscar from "./Buscar"
 function SongList({tipo}) {
     const { user } = useAuth("state");
     //const { user } = state;
+
+    const [selectedItem, setSelectedItem] = useState(null); //Para modal
+    const [isModalOpen, setIsModalOpen] = useState(false); //Para modal
 
     const [type, setType] = useState(tipo); // Estado para el tipo de contenido (por defecto filta por canción.)
     const [{ data, isError, isLoading }, doFetch] = useFetch(
@@ -26,7 +34,17 @@ function SongList({tipo}) {
     //const [searchTerm, setSearchTerm] = useState('');
     const [filteredItems, setFilteredItems] = useState([]);
     const [editingItem, setEditingItem] = useState(null);
+
+    //Para modal
+    const handleItemClick = (item) => {
+        setSelectedItem(item);
+        setIsModalOpen(true);
+    };
     
+    const closeModal = () => {
+        setIsModalOpen(false);
+        setSelectedItem(null);
+    };
 
     useEffect(() => {
         doFetch();
@@ -94,6 +112,7 @@ function SongList({tipo}) {
                                     <SongCard 
                                         item={item} 
                                         type={type}
+                                        onClick={() => handleItemClick(item)}
                                         onDelete={() => handleDelete(item.id)} 
                                         onEdit={() => handleEdit(item)} 
                                     />
@@ -101,6 +120,22 @@ function SongList({tipo}) {
                             ))}
                         </div>
                     </div>
+                    
+                    {isModalOpen && (
+                        <div className="modal is-active">
+                            <div className="modal-background" onClick={closeModal}></div>
+                            <div className="modal-content">
+                                {/* Renderiza el componente de detalle basado en el tipo */}
+                                {type === "artist" && <ArtistDetail artist={selectedItem} />}
+                                {type === "genre" && <GenreDetail genre={selectedItem} />}
+                                {type === "playlist" && <PlaylistDetail playlist={selectedItem} />}
+                                {type === "album" && <AlbumDetail album={selectedItem} />}
+                                {/* Agrega más condiciones para otros tipos */}
+                            </div>
+                            <button className="modal-close is-large" aria-label="close" onClick={closeModal}></button>
+                        </div>
+                    )}
+
                     <div className="column is-narrow">
                         {nextPage && 
                         <button className="button has-background-light" onClick={() => fetchPage(nextPage)}>

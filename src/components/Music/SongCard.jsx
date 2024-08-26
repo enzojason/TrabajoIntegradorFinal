@@ -1,5 +1,4 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React , { useState } from 'react';
 
 import "./App.css" 
 import album from '../../assets/album.png'
@@ -7,12 +6,24 @@ import artist from '../../assets/artista.png'
 import playlist from '../../assets/playlist.png'
 import genre from '../../assets/genero.png'
 
+import AlbumDetail from "./AlbumDetail";
+import ArtistDetail from "./ArtistDetail";
+import PlaylistDetail from "./PlaylistDetail";
+import GenreDetail from "./GenreDetail";
+import Modal from './Modal'; 
 
 const SongCard = ({ item, type, onDelete, onEdit }) => {
-  const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState(null);
 
   const handleCardClick = () => {
-    navigate(`/${type}/${item.id}`);  
+    setModalContent(type);
+    setIsModalOpen(true);
+  };
+
+const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setModalContent(null);
   };
 
   const renderContent = () => {
@@ -20,7 +31,7 @@ const SongCard = ({ item, type, onDelete, onEdit }) => {
     switch (type) {
       case 'song':
         return (
-          <div className="card" onClick={handleCardClick}>
+          <div className="card" >
                 <div className="card-image">
                   <figure className="image is-4by3">
                     <img
@@ -71,12 +82,7 @@ const SongCard = ({ item, type, onDelete, onEdit }) => {
               <div className="media">
                       <div className="media-content" style={{ fontSize: '13px' }}>
                         <p >Año: {item.year}</p>
-                        <p>  Creado: {new Date(item.created_at).toLocaleDateString()}</p> 
-                        <p> Actualizado: {new Date(item.updated_at).toLocaleDateString()}</p> 
-                        <div className="media-content" style={{ fontSize: '13px' }}>
-                        {item.entries>0 ? (<p className="has-text-info">Numero de Visistas: {item.entries}</p>)
-                                        :(<div className="has-text-info">Sin Visitas</div>)}
-                      </div>
+
                       </div>
 
               </div>
@@ -100,21 +106,13 @@ const SongCard = ({ item, type, onDelete, onEdit }) => {
                 </div>
             </div>
 
-            <div className="media"
-            style={{height: "50px",}}>
-                <div className="media-content">
-                  <p className="subtitle is-6" style={{ overflow: 'auto', maxHeight: '60px', fontSize: '13px' }}>{item.bio}</p>
-                </div>
-            </div>
-
             <div className="media">
                 <div className="media-content" style={{ fontSize: '13px' }}>
                 <a href={item.website} className="button is-link is-small">Website</a>
-                <p>Creado: {new Date(item.created_at).toLocaleDateString()}</p>
-                <p> Actualizado: {new Date(item.updated_at).toLocaleDateString()}</p>
+
                 <div className="media-content" style={{ fontSize: '13px' }} >
-                        {item.entries>0 ? (<p className="has-text-info">Numero de Visistas: {item.entries}</p>)
-                                        :(<div className="has-text-info">Sin Visitas</div>)}
+                        {item.entries>0 ? (<p className="has-text-info">Numero de Entrdas: {item.entries}</p>)
+                                        :(<div className="has-text-info">Sin Entrdas</div>)}
                       </div>
                 </div>
   
@@ -143,22 +141,10 @@ const SongCard = ({ item, type, onDelete, onEdit }) => {
                 
               <div className="media">
                       <div className="media-content">
-                        <p className="subtitle is-6 " style={{ overflow: 'auto', maxHeight: '100px', fontSize: '13px' }}>Descripción: {item.description}</p>
-                        
+                        <p className="subtitle is-6 " style={{ overflow: 'auto', maxHeight: '100px', fontSize: '13px' }}><span className="has-text-weight-bold">Descripción:</span> {item.description}</p>
                       </div>
-              </div>
-
-              <div className="media">
-                <div className="media-content " style={{ fontSize: '13px' }}>
-                  <p>Creado: {new Date(item.created_at).toLocaleDateString()}</p>
-                  <p> Actualizado: {new Date(item.updated_at).toLocaleDateString()}</p>
-                  <div className="media-content" style={{ fontSize: '13px' }}>
-                        {item.entries>0 ? (<p className="has-text-info">Numero de Visistas: {item.entries}</p>)
-                                        :(<div className="has-text-info">Sin Visitas</div>)}
-                  </div>
                 </div>
-                
-            </div>
+          
           </div>
 
         );
@@ -181,25 +167,9 @@ const SongCard = ({ item, type, onDelete, onEdit }) => {
                 
               <div className="media">
                       <div className="media-content">
-                        <p className="subtitle is-6" style={{ overflow: 'auto', maxHeight: '100px', fontSize: '13px'  }}>Descripción: {item.description}</p>
+                        <p className="subtitle is-6" style={{ overflow: 'auto', maxHeight: '100px', fontSize: '13px'  }}><span className="has-text-weight-bold">Descripción:</span> {item.description}</p>
                       </div>
               </div>
-
-              <div className="media">
-                <div className="media-content " style={{ fontSize: '13px' }}>
-                    Creado: {new Date(item.created_at).toLocaleDateString()}
-                    <br />
-                    Actualizado: {new Date(item.updated_at).toLocaleDateString()}
-                </div>
-            </div>
-
-              <div className="media">
-                      <div className="media-content" style={{ fontSize: '13px' }}>
-                        {item.entries>0 ? (<p className=" has-text-info">Numero de Visistas: {item.entries}</p>)
-                                        :(<div className="has-text-info">Sin Visitas</div>)}
-                      </div>
-              </div>
-
         </div>
         );
       default:
@@ -209,13 +179,23 @@ const SongCard = ({ item, type, onDelete, onEdit }) => {
 
   return (
         <div className="card">
-                {renderContent()}
+            {renderContent()}
+
             <div className="buttons">
               {type === 'song' && (
                 <>
                  </>
               )}
             </div>
+          {isModalOpen && (
+            <Modal onClose={handleCloseModal}>
+              {modalContent === 'song' && <SongDetail song={item} />}  {/* Suponiendo que tienes un componente SongDetail */}
+              {modalContent === 'album' && <AlbumDetail album={item} />}
+              {modalContent === 'artist' && <ArtistDetail artist={item} />}
+              {modalContent === 'playlist' && <PlaylistDetail playlist={item} />}
+              {modalContent === 'genre' && <GenreDetail genres={item} />}
+            </Modal>
+      )}
         </div>
   );
 };

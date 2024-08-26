@@ -13,6 +13,11 @@ import PlaylistPage from './pages/PlaylistPage';
 import GenrePage from './pages/GenrePage';
 import NotFoundPage from './pages/NotFoundPage';
 
+import PlaylistDetail from './components/Music/PlaylistDetail';
+import AlbumDetail from './components/Music/AlbumDetail';
+import GenreDetail from './components/Music/GenreDetail';
+import ArtistDetail from './components/Music/ArtistDetail';
+
 
 const AppRoutes = () => (
   <Routes>
@@ -26,6 +31,12 @@ const AppRoutes = () => (
       <Route path="/artists" element={<ArtistPage />} />
       <Route path="/playlists" element={<PlaylistPage />} />
       <Route path="/genres" element={<GenrePage />} />
+      
+      <Route path="/playlist/:id" element={<PlaylistDetail />} />
+      <Route path="/album/:id" element={<AlbumDetail />} />
+      <Route path="/genre/:id" element={<GenreDetail />} />
+      <Route path="/artist/:id" element={<ArtistDetail />} />
+
       <Route path="*" element={<NotFoundPage />} />
     </Route>
   </Routes>

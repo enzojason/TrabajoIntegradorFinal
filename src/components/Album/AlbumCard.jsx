@@ -87,7 +87,7 @@ const handleEdit = (album) => {
              </div>  
         
         )}
-      </div>
+    </div>
 
   );
 };
